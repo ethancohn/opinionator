@@ -1,33 +1,24 @@
 <?php
 
-
-	session_start();
-
-	if( isset($_SESSION['user_id']) ){
-		header("Location: /");
-	}
-
 	require 'database.php';
 
 	$message = '';
 
-	if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email']) && !empty($_POST['country'])):
+	if (!empty($_POST['username']) && !empty($_POST['password'])) {
 
-		$sql = "INSERT INTO users (username, password, email, country) VALUES (:email, :password)";
-		$statement = $connection->prepare($sql);
+		$sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
+		$stmt = $connection->prepare($sql);
 		
-		$statement->bindParam(':username', $_POST['username']);
-		$statement->bindParam(':password', password_hash$_POST(['password'], PASSWORD_BCRYPT));
-		$statement->bindParam(':email', $_POST['email']);
-		$statement->bindParam(':country', $_POST['country']);
+		$stmt->bindParam(':username', $_POST['username']);
+		$stmt->bindParam(':password', password_hash($_POST['password'], PASSWORD_BCRYPT));
 
-		if ($statement->execute()) {
-			$message = 'User created.';
+		if ($stmt->execute()) {
+			$message = "Created new user.";
 		}
 		else {
-			$message = 'User creation failed.';
+			$message = "Failed to create new user.";
 		}
-	endif;
+	}
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +35,7 @@
 		<p><?= $message ?></p>
 	<?php endif; ?>
 
+	
 	<form action="register.php" method="POST">
 		
 		Username: <input type="text" placeholder="Username" name="username"> <br>

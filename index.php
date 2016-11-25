@@ -1,14 +1,14 @@
 <?php
 
-session_start();
+ session_start();
 
 require 'database.php';
 
-if(isset($_SESSION['user_id'])) {
+if( isset($_SESSION['user_id']) ){
 
-	$records = $connection->prepare('SELECT id,username,email,password FROM users WHERE id=:id');
-	$records->bindParam(':id', $_SESSION[user_id]);
-	$records.execute();
+	$records = $conn->prepare('SELECT id,email,password FROM users WHERE id = :id');
+	$records->bindParam(':id', $_SESSION['user_id']);
+	$records->execute();
 	$results = $records->fetch(PDO::FETCH_ASSOC);
 
 	$user = NULL;
@@ -16,6 +16,7 @@ if(isset($_SESSION['user_id'])) {
 	if( count($results) > 0){
 		$user = $results;
 	}
+
 }
 
 ?>
@@ -28,16 +29,6 @@ if(isset($_SESSION['user_id'])) {
 </head>
 <body>
 
-	<?php if (!empty($user)): ?>
-
-		<br />Welcome <?= $user['username']; ?> 
-		<br /><br />You are successfully logged in!
-		<br /><br />
-		<a href="logout.php">Logout?</a>
-
-	}
-
-	<?php else: ?>
 
 	<h1>Welcome to Opinionator! </h1><br>
 	<a href="login.php">Login </a> or 

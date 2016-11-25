@@ -8,9 +8,9 @@
 		header("Location: /");
 	}
 
-	if (!empty($_POST['username']) && !empty($_POST['password']))
+	if (!empty($_POST['username']) && !empty($_POST['password'])) {
 
-		$records = $conn->prepare('SELECT id,email,password FROM users WHERE username = :username');
+		$records = $conn->prepare('SELECT username,password FROM users WHERE username = :username');
 		$records->bindParam(':username', $_POST['username']);
 		$records->execute();
 		$results = $records->fetch(PDO::FETCH_ASSOC);
@@ -26,7 +26,7 @@
 			$message = 'Sorry, those credentials do not match';
 		}
 
-	endif;
+	}
 ?>
 
 <!DOCTYPE html>
