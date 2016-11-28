@@ -1,10 +1,11 @@
 <?php
 
     require 'database.php';
+
     session_start();
     if( isset($_SESSION['user_id']) ){
-        //header("Location: home.html");
-           // exit;
+        session_unset();
+        session_destroy();
     }
 
     $error = false;
@@ -27,7 +28,7 @@
             if(count($results) > 0 && $_POST['password']==$results['password']  ){
 
                 $_SESSION['user_id'] = $results['user_id'];
-                header("Location: home.html");
+                header("Location: home.php");
 
                     exit;
             } else {

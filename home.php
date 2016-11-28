@@ -1,3 +1,15 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['user_id'])) { //if not yet logged in
+   header("Location: index.php");// send to login page
+   exit;
+} 
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +39,7 @@
       <a class="nav-link" href="/user.php">Profile</a>
     </li>
     <li class="nav-item float-xs-right">
-      <a class="nav-link" href="logout.php">Logout</a>
+      <a class="nav-link" href="index.php">Logout</a>
     </li>
   </ul>
 </nav>
