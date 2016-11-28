@@ -4,7 +4,12 @@ require 'database.php';
 
 session.start();
 
-
+function getConvos(user_id) {
+	$query = "SELECT convos_following FROM users WHERE user_id = :user_id";
+	$stmt = $conn->prepare($query);
+	$stmt->bindParam(':user_id, user_id');
+	$convos = $stmt->execute();
+}
 
 
 
@@ -219,26 +224,14 @@ var allData;
 var convoArray=[];//threads
 var msgArray=[];//messages in the thread, empty at first.
 
-      var socket = io();
-      //not used from tut
-      $('form').submit(function(){
-        socket.emit('chat message', $('#m').val());
-        $('#m').val('');
-        return false;
-      });
-      //not used from tut
-      socket.on('chat message', function(msg){
-        $('#messages').append($('<li>').text(msg));
-        //$('#messages').append('<li>'+msg);
-      });
-      
-      //Ask the socket to send data
-      socket.emit('send data', "");
 
       //when we get data back
-      socket.on('send data', function(vallData){
+      //socket.on('send data', function(vallData){
       	allData=vallData;//store in global var
-      	
+      	vallData = <?php echo json_encode($convos); ?>;
+      	allData=JSON.parse(vallData);
+
+      	alert(allData);
       	var len=allData.length;
       	for (i in allData){
       		subData=allData[i].split(';');//get name of thread from first element (; separated)
@@ -251,7 +244,7 @@ var msgArray=[];//messages in the thread, empty at first.
       	for (i in convoArray){
       		thlist(i);
       	}
-      });
+      //});
       
 
     </script>
