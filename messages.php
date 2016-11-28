@@ -2,14 +2,14 @@
 
 require 'database.php';
 
-session.start();
+session_start();
 
-function getConvos(user_id) {
 	$query = "SELECT convos_following FROM users WHERE user_id = :user_id";
 	$stmt = $conn->prepare($query);
-	$stmt->bindParam(':user_id, user_id');
+	$stmt->bindParam(':user_id', $_SESSION['user_id']);
 	$convos = $stmt->execute();
-}
+
+
 
 
 
@@ -65,14 +65,6 @@ body {
 				<div class="list-group" id="threads">
 				<!--Thread list start-->
 				<!-- each "a ref" is a list a thread these(2) are placeholder-->
-					<a href="#" class="list-group-item">
-						<h4 class="list-group-item-heading"> Message title</h4>
-						<p class="list-group-item-text"> OP username  (new icon)</p>
-					</a>
-					<a href="#" class="list-group-item">
-						<h4 class="list-group-item-heading"> Message title</h4>
-						<p class="list-group-item-text"> OP username  (new icon)</p>
-					</a>
 				</div>
 
 			</div>
@@ -84,22 +76,6 @@ body {
 			<div class="panel-body" id="messages" style="max-height:500px;overflow: auto;">
 			<!-- actual messages here-->
 			<!-- Each "well div" is a message post, these are placeholder -->
-				<div class="well">
-				  <div class="media">
-				    <div class="media-left media-top">
-						<a href="#profile">
-							<h4 class="media-object" style="text-align:center;">User name</h4>
-						</a>
-						<a class="muser">
-				    		<img src="avatar.png" class="media-object" style="width:50px">
-						</a>
-				    </div>
-				    <div class="media-body">
-						<h4 class="media-header"><small><i>date time</i></small></h4>	      
-				    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-				</div>
-			</div>
 			
 
 
@@ -224,19 +200,20 @@ var allData;
 var convoArray=[];//threads
 var msgArray=[];//messages in the thread, empty at first.
 
-
+		alert("1");
       //when we get data back
       //socket.on('send data', function(vallData){
-      	allData=vallData;//store in global var
-      	vallData = <?php echo json_encode($convos); ?>;
+      	//sallData=vallData;//store in global var
+
+      	vallData = <?php echo json_encode($convos); ?>;alert(vallData);
       	allData=JSON.parse(vallData);
 
       	alert(allData);
       	var len=allData.length;
       	for (i in allData){
-      		subData=allData[i].split(';');//get name of thread from first element (; separated)
+      		//subData=allData[i].split(';');//get name of thread from first element (; separated)
       		//wouldnt do that with sql stuff
-      		convoArray[i]=subData[0];
+      		convoArray[i]=i;//subData[0];
       	}
       	//remove place holder
       	clearthreads();

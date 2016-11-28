@@ -28,6 +28,7 @@
             if(count($results) > 0 && $_POST['password']==$results['password']  ){
 
                 $_SESSION['user_id'] = $results['user_id'];
+                $_SESSION['username'] = $results['username'];
                 header("Location: home.php");
 
                     exit;
