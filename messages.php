@@ -22,16 +22,11 @@ session_start();
   <title>Opinion message box</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
  <link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <!--<script src="/socket.io/socket.io.js"></script>-->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <!--
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script
-  -->
+
 <style>
 	html{
   height: 100%;
@@ -43,7 +38,21 @@ body {
 
 </head>
 <body>
-<!--Body, essantially the page -->
+
+<nav class="navbar navbar-light bg-faded">
+  <ul class="nav navbar-nav">
+     
+    <li class="nav-item active">
+      <a class="nav-link" href="./home.php">Home <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./profile.php"> <?php echo $username ?>  </a>
+    </li>
+    <li class="nav-item float-sm-right">
+      <a class="nav-link" href="./index.php">Logout</a>
+    </li>
+  </ul>
+</nav>
 
 <div class="container" style="height: 100%;">
 <!-- Contains the full page -->
@@ -87,7 +96,11 @@ body {
 </div>
 
 
+  
 <!-- Scripts start here -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 

@@ -15,15 +15,13 @@ if(isset($_POST['submit'])) {
     $topic = $_POST['topic'];
     $message = $_POST['message'];
 
-    /*$sql = "SELECT MAX(convo_id) FROM messages";
-    $stmt = $conn->prepare($sql);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC); */
-    $max = 1;
-    
+   
+    $highest_id = 5;
+
     $sql = "INSERT INTO messages (convo_id, convo_name, username, msg_body) VALUES (:convo_id, :convo_name, :username, :msg_body)";
     $stmt = $conn->prepare($sql);
 
-    $stmt->bindParam(':convo_id', $max, PDO::PARAM_INT);
+    $stmt->bindParam(':convo_id', $highest_id, PDO::PARAM_INT);
     $stmt->bindParam(':convo_name', $topic, PDO::PARAM_STR);
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
     $stmt->bindParam(':msg_body', $message, PDO::PARAM_STR);
@@ -94,7 +92,7 @@ function randomMsg() {
                         <h1>I'm Feeling Lucky</h1>
                         <ul>
                             <li>
-                                 <a href="" class="icon fa-question"><span class="label">Receive</span></a>
+                                 <a href="./reply.php" class="icon fa-question"><span class="label">Receive</span></a>
                             </li>
                         </ul>
                     </div>
@@ -129,11 +127,11 @@ function randomMsg() {
         <form action="home.php" method="post">
           <div class="form-group">
             <label for="title">Topic:</label>
-            <input type="text" class="form-control" id="topic">
+            <input type="text" class="form-control" name="topic">
           </div>
           <div class="form-group">
             <label for="message">Message:</label>
-            <textarea class="form-control" id="message" style="height: 150px"></textarea> 
+            <textarea class="form-control" name="message" style="height: 150px"></textarea> 
           </div>
           <div class="checkbox">
             <label><input type="checkbox">Follow</label>

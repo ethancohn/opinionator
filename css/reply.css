@@ -1,0 +1,68 @@
+@import url("font-awesome/css/font-awesome.min.css");
+@import url('https://fonts.googleapis.com/css?family=Asap:400,700');
+
+html,body {
+    font-family: 'Asap', sans-serif;
+}
+.panel-default{
+	padding: 3em !important;
+}
+.panel-heading{
+    position: relative;
+    overflow: auto;
+    vertical-align: middle;
+}
+
+.panel-heading  .btn{
+	text-decoration: none !important;
+	background-color: transparent !important;
+    float: right;
+    padding: 0.5rem 0rem;
+}
+
+.panel-heading .top{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.panel-heading h2{
+    display: inline-block;
+    vertical-align: middle;
+    top: 50%;
+    position: absolute; 
+    transform: translate(0, -50%)
+}
+
+#dummy{
+    height: 400px;
+    overflow: hidden;
+
+       border-style: solid;
+       border-color: lightgrey;
+        border-width: 0.5px;
+}
+
+.panel-body{
+      height: 400px;
+      overflow: auto;
+      width: 105%;
+}
+
+.media-body{
+    padding-right: 3em;
+}
+
+.panel-footer{
+    width: 100%;
+    padding-top: 1em !important;
+    display: inline-block;
+}
+
+.panel-footer .checkbox{
+    width: 50%;
+    margin: 0 0;
+}
+
+.panel-footer #submit{
+    float: right;
+}
