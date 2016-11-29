@@ -46,9 +46,9 @@ if(isset($_POST['submit'])) {
     <title>Opinion message box</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <link rel="stylesheet" href="css/reply.css">
     <link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
-     <link rel="stylesheet" href="css/reply.css">
+     
 </head>
 <body>
 

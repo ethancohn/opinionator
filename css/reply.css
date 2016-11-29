@@ -66,3 +66,8 @@ html,body {
 .panel-footer #submit{
     float: right;
 }
+
+.card {
+    margin-bottom: 0 !important;
+    border-radius: 0.05rem !important;
+}
