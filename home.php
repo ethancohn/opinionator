@@ -15,8 +15,10 @@ if(isset($_POST['submit'])) {
     $topic = $_POST['topic'];
     $message = $_POST['message'];
 
-   
-    $highest_id = 5;
+    $query = "SELECT * FROM messages";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_array($result);
+    $highest_id = $row['convo_id']+1;
 
     $sql = "INSERT INTO messages (convo_id, convo_name, username, msg_body) VALUES (:convo_id, :convo_name, :username, :msg_body)";
     $stmt = $conn->prepare($sql);
