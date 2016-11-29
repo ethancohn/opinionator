@@ -9,23 +9,31 @@ if(!isset($_SESSION['user_id'])) { //if not yet logged in
    header("Location: index.php");// send to login page
    exit;
 } 
- $con = mysqli_connect("localhost", "root", "spurs", "opinionator_database");
-              if (mysqli_connect_errno()) {
-                printf("Connect failed: %s\n", mysqli_connect_error());
-                exit();
-              }
+if(isset($_POST['catch'])) { //display a new thread
+    $query = "SELECT * FROM messages";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_array($result);
+    $max = $row['convo_id'];
 
-$que = "SELECT * FROM messages where convo_id=5";
+    $convo_id= rand(1, $max );
+ 
 
-$r = mysqli_query($con, $que);
-$row = mysqli_fetch_assoc($r);
-$topic = $row['convo_name'];
-$convo_id = $row['convo_id'];
+    $que = "SELECT * FROM messages where convo_id=$convo_id";
 
-if(isset($_POST['submit'])) {
+    $r = mysqli_query($con, $que);
+    $row = mysqli_fetch_assoc($r);
+    $topic = $row['convo_name'];
+ 
+}
+if(isset($_POST['submit'])) { //Adding new comment
     
     $comment = $_POST['comment'];
+    $convo_id = $_POST['prev'];
+    $que = "SELECT * FROM messages where convo_id=$convo_id";
 
+    $r = mysqli_query($con, $que);
+    $row = mysqli_fetch_assoc($r);
+    $topic = $row['convo_name'];
     $sql = "INSERT INTO messages (convo_id, convo_name, username, msg_body) VALUES (:convo_id, :convo_name, :username, :msg_body)";
     $stmt = $conn->prepare($sql);
 
@@ -82,14 +90,16 @@ if(isset($_POST['submit'])) {
               echo "$topic";
             ?>
           </h2>
-          <button class="btn top"><i class="fa fa-plus-square-o fa-3x" aria-hidden="true"></i></button>
+          <form action="reply.php" method="post">
+            <button name="catch" class="btn top"><i class="fa fa-plus-square-o fa-3x" aria-hidden="true"></i></button>
+          </form>
         </div>
 
         <div id="dummy">
           <div class="panel-body" id="messages"> 
 
            <?php
-              $query = "SELECT * FROM messages where convo_id=5";
+              $query = "SELECT * FROM messages where convo_id=$convo_id";
 
               $res = mysqli_query($con, $query);
               if ( false===$result ) {
@@ -136,7 +146,8 @@ if(isset($_POST['submit'])) {
                 </label>
               </div>
             </div>
-
+            <input type="hidden" name="prev" value="<?php echo $convo_id; ?>" >
+            <input type="hidden" name="prevtop" value="<?php echo $topic; ?>" >
             <div class="div col-sm-6">
               <div class="submit">
                 <input id="submit" type="submit" name="submit" class="btn btn-default" value="Reply" style="align-content: right">

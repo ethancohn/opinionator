@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 28, 2016 at 10:37 PM
+-- Generation Time: Nov 29, 2016 at 02:47 AM
 -- Server version: 5.7.13-0ubuntu0.16.04.2
 -- PHP Version: 7.0.8-0ubuntu0.16.04.3
 
@@ -39,16 +39,37 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`msg_id`, `convo_id`, `convo_name`, `username`, `msg_body`) VALUES
-(1, 222, 'rrerer', ':username', 'hrjgkhak'),
-(3, 60, 'hello', 'jeffrey', 'I hate comp307'),
-(4, 1, 'wow', 'tony', 'tthis is cool'),
-(5, 1, 'hello', 'tony', 'max'),
+(1, 6, 'maxi', 'jeffrey', 'hrjgkhak'),
+(3, 6, 'maxi', 'jeffrey', 'I hate comp307'),
+(4, 3, 'wow', 'tony', 'tthis is cool'),
+(5, 2, 'hello', 'tony', 'max'),
 (8, 5, 'populate', 'tony', 'hey whats up'),
 (9, 5, 'populate', 'tony', 'wow im talking to myself'),
 (10, 5, 'populate', 'tony', 'how are you doing'),
 (11, 5, 'populate', 'tony', 'yo wow'),
 (12, 5, 'populate', 'tony', 'wow this is sick'),
-(13, 5, 'populate', 'tony', 'pls work');
+(14, 5, 'populate', 'tony', 'damn right it worked'),
+(15, 5, 'populate', 'tony', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus rem, accusantium placeat animi ut perferendis culpa recusandae, incidunt, aliquam numquam cum deleniti facilis laboriosam autem quam maiores molestias quasi, ab?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus rem, accusantium placeat animi ut perferendis culpa recusandae, incidunt, aliquam numquam cum deleniti facilis laboriosam autem quam maiores molestias quasi, ab?'),
+(16, 4, 'yo', 'tony', 'test'),
+(19, 1, 'max', 'tony', 'what up'),
+(20, 1, 'max', 'tony', 'up'),
+(21, 1, 'max', 'tony', 'test'),
+(23, 6, 'maxi', 'tony', 'cmon'),
+(24, 6, 'maxi', 'tony', 'nice'),
+(25, 3, 'wow', 'tony', 'wow'),
+(26, 4, 'yo', 'tony', 'does this work?'),
+(27, 2, 'hello', 'tony', 'wut?'),
+(28, 3, 'wow', 'tony', 'hi'),
+(29, 1, 'max', 'tony', 'EVERYTIME'),
+(30, 2, 'hello', 'tony', ''),
+(32, 4, 'yo', 'tony', 'what da fuq'),
+(33, 3, 'wow', 'tony', 'whyyyy'),
+(35, 5, 'populate', 'tony', 'yo'),
+(36, 4, 'yo', 'tony', 'wuuuuuuuuut'),
+(41, 4, 'yo', 'tony', 'yoyoyoyoyo'),
+(42, 4, 'yo', 'tony', 'hello'),
+(43, 2, 'hello', 'tony', 'weerrrkkk'),
+(44, 2, 'hello', 'tony', 'goddamn');
 
 --
 -- Indexes for dumped tables
@@ -68,7 +89,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
