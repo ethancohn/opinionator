@@ -51,8 +51,9 @@
 <head>
 	<title>Opinionator</title>
 	<link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/styles.css">
+    
     <link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 
@@ -61,19 +62,25 @@
         <a class="link link--nukun" href="#">Op<span>ini</span>on</a>
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 ">
-                    <div class="jumbotron" id="msg">
+                <div class="col-sm-8 offset-sm-2 ">
+                    <div class="jumbotron" id="log">
                         <h1>Login</h1>
                         <form action="index.php" method="POST">
-							<input type="text" placeholder="username" name="username"> <br>
-							<input type="password" placeholder="password" name="password"> <br><br>
-							<input type="submit" name="submit"> <br><br>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Username" name="username"> 
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Password" name="password"> 
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block" name="submit">Login</button>
+                            </div>
 						</form>
                         <?php
                        if ( isset($message) ) { ?>
                             <p><?= $message ?></p>
                         <?php } ?>
-						or <a href="register.php">Register</a>
+						Don't have an account? <a id="signup" href="register.php">Register</a>
                     </div>
                      
                 </div>

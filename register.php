@@ -53,10 +53,11 @@
 <head>
 	<title>
 		Opinionator Registration
-		<link rel="stylesheet" href="css/reset.css">
-    	<link rel="stylesheet" href="css/styles.css">
-     	<link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
 	</title>
+		<link rel="stylesheet" href="css/reset.css">
+    	<link rel="stylesheet" href="css/login.css">
+     	<link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
+	
 </head>
 <body>
 	<div class="content">
@@ -65,15 +66,22 @@
         <div class="container">
             <div class="row">
                 
-                <div class="col-sm-6">
-                    <div class="jumbotron" id="receive">
-                        <h1>Register</h1>
+                <div class="col-sm-8 offset-sm-2">
+                    
+                        <h1 style="float:left">Join Opinionator!</h1>
                         <form action="register.php" method="POST" id="regForm">
-				
-							<input type="text" placeholder="username" name="username"> <br>
-							<input type="text" placeholder="password" name="password"> <br>
-							<input type="text" placeholder="confirm password" name="confirm_password"> <br>							
-							<select name="country">
+							<div class="form-group">
+								<input type="text" class="form-control form-control-lg"  placeholder="Username" name="username">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control form-control-lg"  placeholder="Password" name="password">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control form-control-lg"  placeholder="Confirm Password" name="confirm_password">
+							</div>
+							<div class="form-group">						
+								<select class="form-control form-control-lg"  name="country">
+									
 								<option value="select country:" title="Select Country:">Select Country:</option>
 								<option value="Afghanistan" title="Afghanistan">Afghanistan</option>
 								<option value="Åland Islands" title="Åland Islands">Åland Islands</option>
@@ -324,20 +332,22 @@
 								<option value="Yemen" title="Yemen">Yemen</option>
 								<option value="Zambia" title="Zambia">Zambia</option>
 								<option value="Zimbabwe" title="Zimbabwe">Zimbabwe</option>
-							</select> <br><br>
+								</select>
+							</div>
 
-							<input type="submit" value="Submit" name="submit"> <br>
+
+							<input type="submit" value="Sign Up"  class="btn btn-primary btn-lg btn-block" name="submit"> <br>
 						</form>
 
  						<?php
 					   if ( !empty($message)) { ?>
 					    	<p><?= $message ?></p>
 					    <?php } ?>
-
+					
 						<a href="index.php">Back to Login</a>
 
                     </div>
-                </div>
+               
             </div>       
         </div>
     </div>
