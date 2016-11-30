@@ -65,7 +65,6 @@
         <a class="link link--nukun" href="#">Op<span>ini</span>on</a>
         <div class="container">
             <div class="row">
-                
                 <div class="col-sm-8 offset-sm-2">
                     
                         <h1 style="float:left">Join Opinionator!</h1>
@@ -334,6 +333,7 @@
 								<option value="Zimbabwe" title="Zimbabwe">Zimbabwe</option>
 								</select>
 							</div>
+
 
 
 							<input type="submit" value="Sign Up"  class="btn btn-primary btn-lg btn-block" name="submit"> <br>

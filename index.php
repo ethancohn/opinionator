@@ -1,4 +1,4 @@
-<?php
+j<?php
 
     require 'database.php';
 
@@ -64,6 +64,7 @@
             <div class="row">
                 <div class="col-sm-8 offset-sm-2 ">
                     <div class="jumbotron" id="log">
+
                         <h1>Login</h1>
                         <form action="index.php" method="POST">
                             <div class="form-group">
