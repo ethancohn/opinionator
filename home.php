@@ -15,10 +15,10 @@ if(isset($_POST['submit'])) {
     $topic = $_POST['topic'];
     $message = $_POST['message'];
 
-    $query = "SELECT * FROM messages";
+    $query = "SELECT MAX(convo_id) as max FROM messages";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_array($result);
-    $highest_id = $row['convo_id']+1;
+    $highest_id = $row['max']+1;
 
     $sql = "INSERT INTO messages (convo_id, convo_name, username, msg_body) VALUES (:convo_id, :convo_name, :username, :msg_body)";
     $stmt = $conn->prepare($sql);
@@ -48,8 +48,9 @@ function randomMsg() {
 
     <!-- custom css -->
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/styles.css">
+    
      <link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
+     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <!--
@@ -61,7 +62,7 @@ function randomMsg() {
   <ul class="nav navbar-nav">
      
     <li class="nav-item active">
-      <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="/home.php">Home <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="profile.php"> <?php echo $username ?>  </a>
@@ -94,7 +95,12 @@ function randomMsg() {
                         <h1>I'm Feeling Lucky</h1>
                         <ul>
                             <li>
-                                 <a href="./reply.php" class="icon fa-question"><span class="label">Receive</span></a>
+
+                            <form action="reply.php" method="post">
+                                <a href="javascript:;" onclick="parentNode.submit();" class="icon fa-question"><span class="label">Receive</span></a>
+                                <input type="hidden" name="catch" />
+                            </form>
+                                 
                             </li>
                         </ul>
                     </div>
