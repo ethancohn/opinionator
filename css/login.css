@@ -17,8 +17,11 @@ html body {
 }
 
 .content h1{
-    font-weight: 600;
+    
+    font-weight: 400;
     font-size: 2em;
+    padding-bottom: 0.8em;
+    
 }
 
 .link {
@@ -131,105 +134,5 @@ html body {
 
 
 
-
-.jumbotron a {
-	-webkit-tap-highlight-color: transparent;
-	-webkit-touch-callout: none;
-	border: 0;
-	display: inline-block;
-	text-decoration: none;
-	color: #3b5998;
-}
-
-	.jumbotron a:before {
-		-moz-transition: all 0.2s ease-in-out;
-		-webkit-transition: all 0.2s ease-in-out;
-		-ms-transition: all 0.2s ease-in-out;
-		transition: all 0.2s ease-in-out;
-		border-radius: 100%;
-		border: solid 1px #3b5998;
-		display: block;
-		font-size: 1.75em;
-		height: 2.5em;
-		line-height: 2.5em;
-		position: relative;
-		text-align: center;
-		top: 0;
-		width: 2.5em;
-	}
-
-	.jumbotron a:hover {
-		font-size: 1.1em;
-		text-decoration: none;
-	}
-
-		.jumbotron a:hover:before {
-			background-color: rgba(255, 255, 255, 0.175);
-			color: #3b5998;
-		}
-
-	.jumbotron a:active {
-		font-size: 0.95em;
-		background: none;
-	}
-
-		.jumbotron a:active:before {
-			background-color: rgba(255, 255, 255, 0.35);
-			color: #fff;
-		}
-
-	.jumbotron a span {
-		display: none;
-	}
-
-.jumbotron i {
-	-webkit-tap-highlight-color: transparent;
-	-webkit-touch-callout: none;
-	border: 0;
-	display: inline-block;
-	text-decoration: none;
-	color: #3b5998;
-}
-
-	.jumbotron i:before {
-		-moz-transition: all 0.2s ease-in-out;
-		-webkit-transition: all 0.2s ease-in-out;
-		-ms-transition: all 0.2s ease-in-out;
-		transition: all 0.2s ease-in-out;
-		border-radius: 100%;
-		border: solid 1px #3b5998;
-		display: block;
-		font-size: 1.75em;
-		height: 2.5em;
-		line-height: 2.5em;
-		position: relative;
-		text-align: center;
-		top: 0;
-		width: 2.5em;
-	}
-
-	.jumbotron i:hover {
-		font-size: 1.1em;
-		text-decoration: none;
-	}
-
-		.jumbotron i:hover:before {
-			background-color: rgba(255, 255, 255, 0.175);
-			color: #3b5998;
-		}
-
-	.jumbotron i:active {
-		font-size: 0.95em;
-		background: none;
-	}
-
-		.jumbotron i:active:before {
-			background-color: rgba(255, 255, 255, 0.35);
-			color: #fff;
-		}
-
-	.jumbotron a span {
-		display: none;
-	}
 
 
