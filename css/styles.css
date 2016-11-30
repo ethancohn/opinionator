@@ -129,6 +129,9 @@ html body {
     border-right: 0px solid #3b5998;
 }
 
+.modal-dialog{
+	text-align: left; 
+}
 
 
 

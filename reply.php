@@ -34,6 +34,19 @@ if(isset($_POST['submit'])) { //Adding new comment
     $r = mysqli_query($con, $que);
     $row = mysqli_fetch_assoc($r);
     $topic = $row['convo_name'];
+
+    if($_POST['follow'] == '1'){
+        $q = "INSERT INTO convos_following (username, convo_id) VALUES (:username, :convo_id)";
+        $stm = $conn->prepare($q);
+
+         $stm->bindParam(':convo_id', $convo_id, PDO::PARAM_INT);
+         $stm->bindParam(':username', $username, PDO::PARAM_STR);
+
+         $stm->execute();
+    }
+    
+
+
     $sql = "INSERT INTO messages (convo_id, convo_name, username, msg_body) VALUES (:convo_id, :convo_name, :username, :msg_body)";
     $stmt = $conn->prepare($sql);
 
@@ -140,11 +153,13 @@ if(isset($_POST['submit'])) { //Adding new comment
             <textarea class="form-control" placeholder="Write a reply" rows="3" name="comment" id="comment"></textarea>
             </div>
             <div class="div col-sm-6">
-              <div class="checkbox" data-toggle="buttons">
-                <label class="btn btn-primary active">
-                <input type="checkbox" checked autocomplete="off"> Follow </input>
-                </label>
-              </div>
+              <label class="custom-control custom-checkbox">
+                <input type="hidden" name="follow" value="0">
+                <input type="checkbox" name="follow" value="1" class="custom-control-input" />
+                
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"> Follow</span>
+            </label>
             </div>
             <input type="hidden" name="prev" value="<?php echo $convo_id; ?>" >
             <input type="hidden" name="prevtop" value="<?php echo $topic; ?>" >
@@ -165,6 +180,13 @@ if(isset($_POST['submit'])) { //Adding new comment
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <!--<script src="/socket.io/socket.io.js"></script>-->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript">
+
+</script>
+
 
 
 <script type="text/javascript">

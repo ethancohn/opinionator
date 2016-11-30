@@ -39,7 +39,7 @@
 
 
 			if ($stmt->execute()) {
-				$message = "Account creation successful. Proceed to login.";
+				$message = "Account successfully created! Proceed to login.";
 			}
 			else {
 				$message = "Failed to create new user.";
@@ -62,7 +62,7 @@
 <body>
 	<div class="content">
 
-        <a class="link link--nukun" href="#">Op<span>ini</span>on</a>
+        <a class="link link--nukun" href="./home.php">Op<span>ini</span>on</a>
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 offset-sm-2">
@@ -73,10 +73,10 @@
 								<input type="text" class="form-control form-control-lg"  placeholder="Username" name="username">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control form-control-lg"  placeholder="Password" name="password">
+								<input type="password" class="form-control form-control-lg"  placeholder="Password" name="password">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control form-control-lg"  placeholder="Confirm Password" name="confirm_password">
+								<input type="password" class="form-control form-control-lg"  placeholder="Confirm Password" name="confirm_password">
 							</div>
 							<div class="form-group">						
 								<select class="form-control form-control-lg"  name="country">
@@ -340,9 +340,15 @@
 						</form>
 
  						<?php
-					   if ( !empty($message)) { ?>
-					    	<p><?= $message ?></p>
-					    <?php } ?>
+					   if ( !empty($message)) { 
+						   if(strcmp($message, "Account successfully created! Proceed to login.")){?>
+								<p style="color:red"><?= $message ?></p>   
+						   <?php }
+						   else { ?>
+							   <p><?= $message ?></p>	
+					    <?php }
+					   }
+						 ?>
 					
 						<a href="index.php">Back to Login</a>
 

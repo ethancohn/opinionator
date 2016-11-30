@@ -1,11 +1,11 @@
 <?php
 	$server = 'localhost';
 	$username = 'root';
-	$password = 'root';
+	$password = 'spurs';
 	$database = 'opinionator_database';
 	try {
 		$conn = new PDO("mysql:host=$server;dbname=$database;", $username, $password);
-		$con = mysqli_connect("localhost", "root", "root", "opinionator_database");
+		$con = mysqli_connect("localhost", "root", "spurs", "opinionator_database");
               if (mysqli_connect_errno()) {
                 printf("Connect failed: %s\n", mysqli_connect_error());
                 exit();

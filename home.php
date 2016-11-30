@@ -14,11 +14,22 @@ if(!isset($_SESSION['user_id'])) { //if not yet logged in
 if(isset($_POST['submit'])) {
     $topic = $_POST['topic'];
     $message = $_POST['message'];
-
+    
     $query = "SELECT MAX(convo_id) as max FROM messages";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_array($result);
     $highest_id = $row['max']+1;
+
+    if($_POST['follow'] == '1'){
+        $q = "INSERT INTO convos_following (username, convo_id) VALUES (:username, :convo_id)";
+        $stm = $conn->prepare($q);
+
+         $stm->bindParam(':convo_id', $highest_id, PDO::PARAM_INT);
+         $stm->bindParam(':username', $username, PDO::PARAM_STR);
+
+         $stm->execute();
+    }
+    
 
     $sql = "INSERT INTO messages (convo_id, convo_name, username, msg_body) VALUES (:convo_id, :convo_name, :username, :msg_body)";
     $stmt = $conn->prepare($sql);
@@ -27,7 +38,6 @@ if(isset($_POST['submit'])) {
     $stmt->bindParam(':convo_name', $topic, PDO::PARAM_STR);
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
     $stmt->bindParam(':msg_body', $message, PDO::PARAM_STR);
-    
     
     $stmt->execute();
             
@@ -75,7 +85,7 @@ function randomMsg() {
 
     <div class="content">
 
-        <a class="link link--nukun" href="#">Op<span>ini</span>on</a>
+        <a class="link link--nukun" href="home.php">Op<span>ini</span>on</a>
                          
         <div class="container">
             <div class="row">
@@ -122,7 +132,7 @@ function randomMsg() {
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -134,16 +144,22 @@ function randomMsg() {
 
         <form action="home.php" method="post">
           <div class="form-group">
-            <label for="title">Topic:</label>
-            <input type="text" class="form-control" name="topic">
+            <label for="topic">Topic</label>
+            <input type="text" class="form-control" id="topic" name="topic">
           </div>
           <div class="form-group">
-            <label for="message">Message:</label>
-            <textarea class="form-control" name="message" style="height: 150px"></textarea> 
+            <label for="message">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="5" style="height: 120px"></textarea> 
           </div>
-          <div class="checkbox">
-            <label><input type="checkbox">Follow</label>
-          </div>
+          <div class="form-check">
+            <label class="custom-control custom-checkbox">
+                <input type="hidden" name="follow" value="0">
+                <input type="checkbox" name="follow" value="1" class="custom-control-input" />
+                
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"> Follow</span>
+            </label>
+            </div>
           <button type="submit" name="submit" class="btn btn-default">Submit</button>
         </form>
       </div>
