@@ -1,4 +1,4 @@
-<?php
+j<?php
 
     require 'database.php';
 
@@ -61,8 +61,8 @@
         <a class="link link--nukun" href="#">Op<span>ini</span>on</a>
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 ">
-                    <div class="jumbotron" id="msg">
+                <div class="row">
+                    <div class="jumbotron" id="receive">
                         <h1>Login</h1>
                         <form action="index.php" method="POST">
 							<input type="text" placeholder="username" name="username"> <br>

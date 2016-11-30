@@ -53,10 +53,10 @@
 <head>
 	<title>
 		Opinionator Registration
-		<link rel="stylesheet" href="css/reset.css">
-    	<link rel="stylesheet" href="css/styles.css">
-     	<link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
 	</title>
+	<link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
 </head>
 <body>
 	<div class="content">
@@ -65,7 +65,7 @@
         <div class="container">
             <div class="row">
                 
-                <div class="col-sm-6">
+                <div class="row">
                     <div class="jumbotron" id="receive">
                         <h1>Register</h1>
                         <form action="register.php" method="POST" id="regForm">
@@ -326,7 +326,7 @@
 								<option value="Zimbabwe" title="Zimbabwe">Zimbabwe</option>
 							</select> <br><br>
 
-							<input type="submit" value="Submit" name="submit"> <br>
+							<input type="submit" value="Submit" name="submit"> <br><br>
 						</form>
 
  						<?php
