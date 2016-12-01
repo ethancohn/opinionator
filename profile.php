@@ -6,10 +6,46 @@ session_start();
 
 $username = $_SESSION['username'];
 
+function print_r2($val){
+        echo '<pre>';
+        print_r($val);
+        echo  '</pre>';
+}
+
 if(!isset($_SESSION['user_id'])) { //if not yet logged in
    header("Location: index.php");// send to login page
    exit;
 } 
+if(isset($_POST['username'])) { //display a new thread
+
+	$user=$_POST['username'];
+    /*$que = "SELECT * FROM messages where convo_id=$convo_id";
+
+    $r = mysqli_query($con, $que);
+    $row = mysqli_fetch_assoc($r);
+    $username = $row['username'];
+    $country = $row['country'];
+    //$aboutme = $row['aboutme'];
+    $posts  = $row['convo_following']; //actually its lenght
+    //$avatar =$row['avatar'];
+    //$notif =$row['notif'];
+ */
+}
+
+	$query = "SELECT * FROM users where username='$user'";
+	$r = mysqli_query($con, $query);
+	if($r == false){
+		echo "ERROR SHAME ON YOU! HOPE ITS NOT ON THE LIVE DEMO.";
+	}else{
+		$row = mysqli_fetch_assoc($r);
+		$user = $row['username'];
+		$country = $row['country'];
+		//$aboutme = $row['aboutme'];
+		$posts  = $row['convos_following']; //actually its lenght
+		//$avatar =$row['avatar'];
+		//$notif =$row['notif'];
+	}
+
 
 ?>
 
@@ -42,6 +78,29 @@ body {
 
 
 <body>
+<nav class="navbar navbar-light bg-faded">
+  <ul class="nav navbar-nav">
+     
+    <li class="nav-item active">
+      <a class="nav-link" href="./home.php">Home <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+    	<form action='./profile.php' method='post'> 
+                            <input type='hidden' name='username' value=<?php echo $username ?>>
+                            
+                            <a class="nav-link" href='javascript:;' onclick='parentNode.submit();'> 
+                              <?php echo $username ?>
+                            </a>
+		</form>
+      <!--<a class="nav-link" href="./profile.php"> <?php echo $username ?>  </a> -->
+    </li>
+    <li class="nav-item float-sm-right">
+      <a class="nav-link" href="./index.php">Logout</a>
+    </li>
+  </ul>
+</nav>
+
+
 	<div class="container" style="height: 100%;">
 <!-- Contains the full page -->
 <div class="col-sm-12">
@@ -63,57 +122,120 @@ body {
 
       <div class="panel-body" id="profile">
 
-      <!--
-      <div class="col-sm-3">
-      	 <ul class="list-group">
-			  <li class="list-group-item"><img src="avatar.png" class="media-object" style="width:100px"></li>
-			  <li class="list-group-item">Country</li>
-			  <li class="list-group-item">Post count</li>
+<?php
+	/*$avatar="avatar.png";
+	$posts="XYZ";
+	$aboutme="LAAAHHH HHOOO STATE OFF YOU";
+	echo "<div class='col-sm-3'>
+      	 <ul class='list-group'>
+			  <li class='list-group-item'><img src='$avatar' class='media-object' style='width:100px'></li>
+			  <li class='list-group-item'>$country</li>
+			  <li class='list-group-item'>Post Count: $posts</li>
 			</ul>
 
       </div>
-		<div class="col-sm-8">
-			<ul class="list-group">
-			  <li class="list-group-item">Name</li>
-			  <li class="list-group-item"><b>About me:</b><br>
-			  <p>
-			  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc convallis tortor at velit congue commodo. Sed nec felis libero. Sed sit amet mollis risus. Fusce commodo maximus dui a pharetra. Donec a iaculis velit, vel fermentum lacus.
+		<div class='col-sm-8'>
+			<ul class='list-group'>
+			  <li class='list-group-item'>$user</li>
+			  <li class='list-group-item'><b>About me:</b><br>
+			  <p>$aboutme
 			  </p>
 			  </li>
-			  <li class="list-group-item">???</li>
+			  <li class='list-group-item'>???</li>
 			</ul>
-		</div>
-		-->
+		</div>";
+*/
+?>
       </div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Modal avatar-->
+<div id="Mchangeavatar" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Change avatar</h4>
+      </div>
+      <div class="modal-body">
+
+        <form action="profile.php" method="post">
+          <div class="form-group">
+            <label for="topic">Enter picture URL</label>
+            <input type="text" class="form-control" id="topic" name="topic">
+          </div>
+
+          <button type="submit" name="submit" class="btn btn-default">Confirm</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Modal Aboutme-->
+<div id="Mchangeaboutme" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Change About me text</h4>
+      </div>
+      <div class="modal-body">
+
+        <form action="profile.php" method="post">
+          <div class="form-group">
+            <label for="topic">Enter your new description</label>
+            <textarea type="form-control" class="form-control" id="topic" name="topic"></textarea>
+          </div>
+
+          <button type="submit" name="submit" class="btn btn-default">Confirm</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 </div>
 
 
 </body>
+
 <script type="text/javascript">
-alert("WHY");</script>
-<script type="text/javascript">
-alert("Yo");
+
 function showprofile(uid){
 	//gets as input the message id
-	alert("ZOMG");
 	
 	//fetch from sql (msgs), get the id of the user
 	var userid=uid;
 	//fetch from sql (users) get his name.
-	var username=<?php echo "$user"; ?>;
+	var tusername=<?php echo json_encode($user); ?>;//<?php //echo "$user"; ?>;
+	//username=JSON.parse(tusername);alert("Yo");
+	
 	//fetch from msg sql, get date
 	var avatar="avatar.png";//<?php //echo "$avatar" ?>;
 	//fetch from mesg sql, get text
 	var about= "Im cool";//<?php //echo "$aboutme" ?>
 	//fetch from mesg sql, get text
-	var country=<?php echo "$country"; ?>;
+	var country=<?php echo json_encode($country); ?>;//<?php// echo "$country"; ?>;
 	//fetch from mesg sql, get text
-	var posts= "xxx";//<?php //echo "$posts" ?>;
+	var posts= "xyz";//<?php //echo "$posts" ?>;
 
 	//creates the post string:
 	//as you can see, it is the equivalent of the "well div" place holder from the message section
+	if (uid==1)
+	{
 	var tnhtml=`<div class="col-sm-3">
       	 <ul class="list-group">
 			  <li class="list-group-item"><img src="`+avatar+`" class="media-object" style="width:100px"></li>
@@ -124,7 +246,7 @@ function showprofile(uid){
       </div>
 		<div class="col-sm-8">
 			<ul class="list-group">
-			  <li class="list-group-item">`+username+`</li>
+			  <li class="list-group-item">`+tusername+`</li>
 			  <li class="list-group-item"><b>About me:</b><br>
 			  <p>`+about+`
 			  </p>
@@ -132,13 +254,74 @@ function showprofile(uid){
 			  <li class="list-group-item">???</li>
 			</ul>
 		</div>`;
+	}
+	else
+	{
+		var tnhtml=`<div class="col-sm-3">
+      	 <ul class="list-group">
+			  <li class="list-group-item"><img src="`+avatar+`" class="media-object" style="width:100px">
+			  <br>
+			  	<button type="button" data-toggle="modal" data-target="#Mchangeavatar" class="btn-info btn-primary btn-xs">change</button>
+			  </li>
+			  <li class="list-group-item">`+country+`</li>
+			  <li class="list-group-item">Post Count: `+posts+`</li>
+			</ul>
+
+      </div>
+		<div class="col-sm-8">
+			<ul class="list-group">
+			  <li class="list-group-item">`+tusername+`</li>
+			  <li class="list-group-item"><b>About me:</b><br>
+			  <p>`+about+`
+			  </p>
+			  <br>
+			  <button type="button" data-toggle="modal" data-target="#Mchangeaboutme" class="btn-info btn-primary btn-xs">change</button>
+			  </li>
+			  <li class="list-group-item">???</li>
+			</ul>
+		</div>`;
+	}
 	//add to messages, it simply adds that string to the inner html of the message section
 		var theDiv = document.getElementById("profile");
 		theDiv.innerHTML += tnhtml; 
-showprofile(1);
+
+}
+function noprofile(){
+	var tnhtml=`<div class='alert alert-info'>
+			  <strong>Error!</strong> No such user found.
+			</div>`;
+
+			var theDiv = document.getElementById('profile');
+			theDiv.innerHTML += tnhtml; 
 }
 
-
 </script>
+<?php
+	if (is_null($user)==true)
+	{
+		echo "
+		<script>
+			noprofile();
+		</script>
+		";
+	}
+	else
+	if ($username==$user)
+	{
+		echo "
+		<script>
+			showprofile(2);
+		</script>
+		";
+	}
+	else
+	{
+		echo "
+		<script>
+			showprofile(1);
+		</script>
+		";
+	}
+?>
 
 </html>
