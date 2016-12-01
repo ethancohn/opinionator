@@ -4,10 +4,14 @@ require 'database.php';
 
 session_start();
 
-	$query = "SELECT convos_following FROM users WHERE user_id = :user_id";
+	/*$query = "SELECT convos_following FROM users WHERE user_id = :user_id";
 	$stmt = $conn->prepare($query);
 	$stmt->bindParam(':user_id', $_SESSION['user_id']);
-	$convos = $stmt->execute();
+	$convos = $stmt->execute();*/
+
+	$username = $_SESSION['username'];
+
+	
 
 
 
@@ -22,19 +26,11 @@ session_start();
   <title>Opinion message box</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
- 
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/styles.css">
- <link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
 
-<style>
-	html{
-  height: 100%;
-}
-body {
-  min-height: 100%;
-}
-</style>
+  <link rel="stylesheet" href="css/inbox.css">
+ <link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
+ 
+
 
 </head>
 <body>
@@ -65,35 +61,130 @@ body {
 </div>
 
 
-
+<div class="inbox">
 <div class="row">
 	<div class="col-sm-4"><!-- This is the threads (message list) section-->
 		<div class="panel panel-default">
 			<div class="panel-heading">Messages</div>
-			<div class="panel-body" >	
+			<div class="panel-body" id="thread">	
 				<div class="list-group" id="threads">
 				<!--Thread list start-->
 				<!-- each "a ref" is a list a thread these(2) are placeholder-->
+				<?php  
+						$query = "SELECT * FROM convos_following where username='$username' ";
+						
+						$res = mysqli_query($con, $query);
+						if ( false===$res ) {
+							printf("error: %s\n", mysqli_error($con));
+						}
+						else {
+							$results=array();
+							while($row = mysqli_fetch_assoc($res)){
+								$results['object_name'][] = $row;
+								$convo_id = $row['convo_id'];
+								$q = "SELECT * FROM messages WHERE convo_id=$convo_id";
+								$result = mysqli_query($con, $q);
+								$r = mysqli_fetch_assoc($result);
+								$topic = $r['convo_name'];
+								$msg = $r['msg_body'];
+							echo "
+							<form action='messages.php' method='post'>
+								<input type='hidden' name='newconvo' value=$convo_id>
+								<a href='javascript:;' class='list-group-item list-group-item-action' onclick='parentNode.submit();'>
+									<h5 class='list-group-item-heading'>$topic</h5>
+									<p class='list-group-item-text'>$msg</p>
+								</a>
+							</form>";
+							}
+						}
+					?>
 				</div>
+				
 
 			</div>
+			
 		</div>
 	</div>
 	<div class="col-sm-8">
 		<div class="panel panel-default">
-			<div class="panel-heading">Message title</div>
-			<div class="panel-body" id="messages" style="max-height:500px;overflow: auto;">
+			<div class="panel-heading"><?php echo "$topic"; ?></div>
+			<div class="panel-body" id="messages" >
 			<!-- actual messages here-->
 			<!-- Each "well div" is a message post, these are placeholder -->
+			<?php 
+			if(isset($_POST['newconvo'])) {
+				$id = $_POST['newconvo'];
+				$query = "SELECT * FROM messages where convo_id=$id";
+              	$res = mysqli_query($con, $query);
+             	 if ( false===$res ) {
+                printf("error: %s\n", mysqli_error($con));
+             	 }
+              	else {
+					$results=array();
+					while($rows = mysqli_fetch_assoc($res)){
+						$results['object_name'][] = $rows;
+						$user = $rows['username'];
+						$msg = $rows['msg_body'];
+						echo "<div class='card'>
+						<div class='media'>
+							<div class='media-left media-top'>
+							<form action='./profile.php' method='post'> 
+								<input type='hidden' name='username' value=$user>
+								
+								<a href='javascript:;' onclick='parentNode.submit();'> 
+									<h4 class='media-object' style='text-align:center;'>$user</h4>
+								</a>
+							</form>
+
+							<a class='muser'>
+								<img src='avatar.png' class='media-object' style='width:100px'>
+							</a>
+							</div>
+							<div class='media-body'>
+							<h4 class='media-header'><small><i>date</i></small></h4>        
+							<p>$msg</p>
+							</div>
+						</div>
+						</div>";
+					}
+                
+              }
+
+			}
+			
+			?>
 			
 
 
 
 		</div>
+		<div class="panel-footer">
+          <form action="messages.php" method="post">
+            <div class="form-group">
+            <textarea class="form-control" placeholder="Write a reply" rows="3" name="comment" id="comment"></textarea>
+            </div>
+            <div class="div col-sm-6">
+              <label class="custom-control custom-checkbox">
+                <input type="hidden" name="follow" value="0">
+                <input type="checkbox" name="follow" value="1" class="custom-control-input" />
+                
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"> Follow</span>
+            </label>
+            </div>
+            <input type="hidden" name="prev" value="<?php echo $convo_id; ?>" >
+            <input type="hidden" name="prevtop" value="<?php echo $topic; ?>" >
+            <div class="div col-sm-6">
+              <div class="submit">
+                <input id="submit" type="submit" name="submit" class="btn btn-default" value="Reply" style="align-content: right">
+              </div>
+             </div>
+            </form>
+        </div>
 		</div>
 	</div>
 </div>
-</div>
+</div></div>
 
 
   
@@ -124,6 +215,8 @@ function thlist(thid){
 	//add to thread list thread inner html
 	addthread(tmsglist);
 }
+
+
 
 function openNewMessage(convoid){
 	//When click on a thread
@@ -213,15 +306,15 @@ var allData;
 var convoArray=[];//threads
 var msgArray=[];//messages in the thread, empty at first.
 
-		alert("1");
+		//alert("1");
       //when we get data back
       //socket.on('send data', function(vallData){
       	//sallData=vallData;//store in global var
 
-      	vallData = <?php echo json_encode($convos); ?>;alert(vallData);
+      	vallData = <?php echo json_encode($convos); ?>; //alert(vallData);
       	allData=JSON.parse(vallData);
 
-      	alert(allData);
+      	//alert(allData);
       	var len=allData.length;
       	for (i in allData){
       		//subData=allData[i].split(';');//get name of thread from first element (; separated)

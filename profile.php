@@ -1,5 +1,7 @@
 <?php
+
 require 'database.php';
+
 session_start();
 
 $username = $_SESSION['username'];
@@ -8,38 +10,6 @@ if(!isset($_SESSION['user_id'])) { //if not yet logged in
    header("Location: index.php");// send to login page
    exit;
 } 
-if(isset($_POST['username'])) { //display a new thread
-
-	$user=$_POST['username'];
-	echo "$user";
-    /*$que = "SELECT * FROM messages where convo_id=$convo_id";
-
-    $r = mysqli_query($con, $que);
-    $row = mysqli_fetch_assoc($r);
-    $username = $row['username'];
-    $country = $row['country'];
-    //$aboutme = $row['aboutme'];
-    $posts  = $row['convo_following']; //actually its lenght
-    //$avatar =$row['avatar'];
-    //$notif =$row['notif'];
- */
-}
-
-	
-	echo "Damn";
-	$query = "SELECT * FROM users where username=$username";
-	$r = mysqli_query($con, $query);
-	if($r == false){
-		echo "fuck me";
-	}else{
-		$row = mysqli_fetch_assoc($r);
-		$user = $row['username'];
-		$country = $row['country'];
-		//$aboutme = $row['aboutme'];
-		$posts  = $row['convos_following']; //actually its lenght
-		//$avatar =$row['avatar'];
-		//$notif =$row['notif'];
-	}
 
 ?>
 

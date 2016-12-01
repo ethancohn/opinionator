@@ -115,7 +115,7 @@ if(isset($_POST['submit'])) { //Adding new comment
               $query = "SELECT * FROM messages where convo_id=$convo_id";
 
               $res = mysqli_query($con, $query);
-              if ( false===$result ) {
+              if ( false===$res ) {
                 printf("error: %s\n", mysqli_error($con));
               }
               else {

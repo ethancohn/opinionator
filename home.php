@@ -122,7 +122,11 @@ function randomMsg() {
                         <h1>Mailbox</h1>
                         <ul>
                             <li>
-                                <a href="messages.php" class="icon fa-envelope-o"><span class="label">Mailbox</span></a>
+                             
+                                <form action="messages.php" method="post">
+                                <a href="javascript:;" onclick="parentNode.submit();" class="icon fa-envelope-o"><span class="label">Inbox</span></a>
+                                <input type="hidden" name="firstconvo" />
+                            </form>
                             </li>
                         </ul>
                     </div>
