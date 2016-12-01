@@ -29,6 +29,10 @@ if(isset($_POST['username'])) { //display a new thread
     //$notif =$row['notif'];
  */
 }
+else
+{
+	$user=$username;
+}
 
 	$query = "SELECT * FROM users where username='$user'";
 	$r = mysqli_query($con, $query);
@@ -53,16 +57,11 @@ if(isset($_POST['username'])) { //display a new thread
   <title>Profile</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
  <link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <!--<script src="/socket.io/socket.io.js"></script>-->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <!--
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script
-  -->
+  
+
 <style>
 	html{
   height: 100%;
@@ -208,7 +207,13 @@ body {
 </div>
 
 
-</body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <!--<script src="/socket.io/socket.io.js"></script>-->
+  
+  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 
@@ -321,5 +326,6 @@ function noprofile(){
 		";
 	}
 ?>
+</body>
 
 </html>
