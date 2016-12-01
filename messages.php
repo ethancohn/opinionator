@@ -11,8 +11,18 @@ session_start();
 
 	$username = $_SESSION['username'];
 
-	
+	if(isset($_POST['newconvo'])) {
+		$id = $_POST['newconvo'];
+		$que = "SELECT * FROM messages where convo_id=$id";	
+	}
 
+	if(isset($_POST['firstconvo'])){
+		$q = "SELECT * FROM convos_following where username='$username' ";
+		$out = mysqli_query($con, $q);
+		$row = mysqli_fetch_array($out);
+		$id = $row['convo_id'];
+		$que = "SELECT * FROM messages where convo_id=$id";	
+	}
 
 
 
@@ -71,7 +81,7 @@ session_start();
 				<!--Thread list start-->
 				<!-- each "a ref" is a list a thread these(2) are placeholder-->
 				<?php  
-						$query = "SELECT * FROM convos_following where username='$username' ";
+						$query = "SELECT * FROM convos_following where username='$username' ORDER BY date_ DESC";
 						
 						$res = mysqli_query($con, $query);
 						if ( false===$res ) {
@@ -112,10 +122,8 @@ session_start();
 			<!-- actual messages here-->
 			<!-- Each "well div" is a message post, these are placeholder -->
 			<?php 
-			if(isset($_POST['newconvo'])) {
-				$id = $_POST['newconvo'];
-				$query = "SELECT * FROM messages where convo_id=$id";
-              	$res = mysqli_query($con, $query);
+
+              	$res = mysqli_query($con, $que);
              	 if ( false===$res ) {
                 printf("error: %s\n", mysqli_error($con));
              	 }
@@ -148,7 +156,7 @@ session_start();
 						</div>";
 					}
                 
-              }
+              
 
 			}
 			
