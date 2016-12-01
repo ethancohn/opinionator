@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 30, 2016 at 01:27 AM
+-- Generation Time: Dec 01, 2016 at 06:27 PM
 -- Server version: 5.7.13-0ubuntu0.16.04.2
 -- PHP Version: 7.0.8-0ubuntu0.16.04.3
 
@@ -28,17 +28,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `convos_following` (
   `username` varchar(20) NOT NULL,
-  `convo_id` int(11) NOT NULL
+  `convo_id` int(11) NOT NULL,
+  `date_` datetime(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `convos_following`
---
-
-INSERT INTO `convos_following` (`username`, `convo_id`) VALUES
-('tony', 20),
-('tony', 21),
-('tony', 2);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
