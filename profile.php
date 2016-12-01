@@ -1,3 +1,48 @@
+<?php
+require 'database.php';
+session_start();
+
+$username = $_SESSION['username'];
+
+if(!isset($_SESSION['user_id'])) { //if not yet logged in
+   header("Location: index.php");// send to login page
+   exit;
+} 
+if(isset($_POST['username'])) { //display a new thread
+
+	$user=$_POST['username'];
+	echo "$user";
+    /*$que = "SELECT * FROM messages where convo_id=$convo_id";
+
+    $r = mysqli_query($con, $que);
+    $row = mysqli_fetch_assoc($r);
+    $username = $row['username'];
+    $country = $row['country'];
+    //$aboutme = $row['aboutme'];
+    $posts  = $row['convo_following']; //actually its lenght
+    //$avatar =$row['avatar'];
+    //$notif =$row['notif'];
+ */
+}
+
+	
+	echo "Damn";
+	$query = "SELECT * FROM users where username=$username";
+	$r = mysqli_query($con, $query);
+	if($r == false){
+		echo "fuck me";
+	}else{
+		$row = mysqli_fetch_assoc($r);
+		$user = $row['username'];
+		$country = $row['country'];
+		//$aboutme = $row['aboutme'];
+		$posts  = $row['convos_following']; //actually its lenght
+		//$avatar =$row['avatar'];
+		//$notif =$row['notif'];
+	}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,6 +92,7 @@ body {
       <div class="panel-heading">Profile</div>
 
       <div class="panel-body" id="profile">
+
       <!--
       <div class="col-sm-3">
       	 <ul class="list-group">
@@ -75,22 +121,26 @@ body {
 
 
 </body>
-
 <script type="text/javascript">
+alert("WHY");</script>
+<script type="text/javascript">
+alert("Yo");
 function showprofile(uid){
 	//gets as input the message id
+	alert("ZOMG");
+	
 	//fetch from sql (msgs), get the id of the user
 	var userid=uid;
 	//fetch from sql (users) get his name.
-	var username="user";
+	var username=<?php echo "$user"; ?>;
 	//fetch from msg sql, get date
-	var avatar="date";
+	var avatar="avatar.png";//<?php //echo "$avatar" ?>;
 	//fetch from mesg sql, get text
-	var about="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc convallis tortor at velit congue commodo. Sed nec felis libero. Sed sit amet mollis risus. Fusce commodo maximus dui a pharetra. Donec a iaculis velit, vel fermentum lacus.";
+	var about= "Im cool";//<?php //echo "$aboutme" ?>
 	//fetch from mesg sql, get text
-	var country="country";
+	var country=<?php echo "$country"; ?>;
 	//fetch from mesg sql, get text
-	var posts="xxx";
+	var posts= "xxx";//<?php //echo "$posts" ?>;
 
 	//creates the post string:
 	//as you can see, it is the equivalent of the "well div" place holder from the message section
@@ -115,9 +165,10 @@ function showprofile(uid){
 	//add to messages, it simply adds that string to the inner html of the message section
 		var theDiv = document.getElementById("profile");
 		theDiv.innerHTML += tnhtml; 
-
+showprofile(1);
 }
 
-showprofile(1)
+
 </script>
+
 </html>

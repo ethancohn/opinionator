@@ -127,9 +127,14 @@ if(isset($_POST['submit'])) { //Adding new comment
                     echo "<div class='card'>
                       <div class='media'>
                         <div class='media-left media-top'>
-                        <a href='#profile'>
-                          <h4 class='media-object' style='text-align:center;'>$user</h4>
-                        </a>
+                          <form action='./profile.php' method='post'> 
+                            <input type='hidden' name='username' value=$user>
+                            
+                            <a href='javascript:;' onclick='parentNode.submit();'> 
+                                <h4 class='media-object' style='text-align:center;'>$user</h4>
+                             </a>
+                          </form>
+
                         <a class='muser'>
                             <img src='avatar.png' class='media-object' style='width:100px'>
                         </a>
