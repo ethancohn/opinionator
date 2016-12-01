@@ -133,8 +133,6 @@ html body {
 	text-align: left; 
 }
 
-
-
 .jumbotron a {
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
@@ -234,5 +232,4 @@ html body {
 	.jumbotron a span {
 		display: none;
 	}
-
 

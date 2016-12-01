@@ -1,14 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
 --
--- Host: localhost:8889
--- Generation Time: Nov 28, 2016 at 05:53 AM
--- Server version: 5.6.33
--- PHP Version: 7.0.12
+-- Host: localhost
+-- Generation Time: Dec 01, 2016 at 06:27 PM
+-- Server version: 5.7.13-0ubuntu0.16.04.2
+-- PHP Version: 7.0.8-0ubuntu0.16.04.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `opinionator_database`
@@ -25,17 +31,19 @@ CREATE TABLE `users` (
   `username` varchar(20) CHARACTER SET armscii8 COLLATE armscii8_bin NOT NULL DEFAULT 'NOT NULL',
   `password` varchar(20) CHARACTER SET armscii8 COLLATE armscii8_bin NOT NULL DEFAULT 'NOT NULL',
   `country` varchar(50) CHARACTER SET armscii8 COLLATE armscii8_bin NOT NULL DEFAULT 'NOT NULL',
-  `convos_following` varchar(1000) DEFAULT NULL
+  `avatar` varchar(200) NOT NULL DEFAULT 'img/default/avatar.png',
+  `about` varchar(200) NOT NULL,
+  `post_count` int(3) NOT NULL,
+  `notifications` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `country`, `convos_following`) VALUES
-(14, 'e', '$2y$10$K3ofQAIzmD3Tg', 'Afghanistan', NULL),
-(15, 'r', 'c', 'Afghanistan', NULL),
-(16, 'tony', 'chen', 'Afghanistan', NULL);
+INSERT INTO `users` (`user_id`, `username`, `password`, `country`, `avatar`, `about`, `post_count`, `notifications`) VALUES
+(16, 'tony', 'chen', 'Afghanistan', 'img/default/avatar.png', '', 0, 0),
+(17, 'kanye', 'west', 'Armenia', 'img/default/avatar.png', '', 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -59,3 +67,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
