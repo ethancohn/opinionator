@@ -160,7 +160,7 @@ function randomMsg() {
           <div class="form-check">
             <label class="custom-control custom-checkbox">
                 <input type="hidden" name="follow" value="0">
-                <input type="checkbox" name="follow" value="1" class="custom-control-input" />
+                <input type="checkbox" name="follow" value="1" class="custom-control-input" checked="true" />
                 
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description"> Follow</span>
