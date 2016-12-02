@@ -157,9 +157,7 @@ session_start();
 	<div class="col-sm-8">
 		<div class="panel panel-default">
 
-			<div class="card-header" id="topic"><?php echo "$topic"; ?></div>
-			<div class="panel-body" id="messages" >
-
+			
 			<!-- actual messages here-->
 			<!-- Each "well div" is a message post, these are placeholder -->
 			<?php 
@@ -176,7 +174,7 @@ session_start();
 						$results['object_name'][] = $rows;
 						$topic = $rows['convo_name'];
 						if($dirty == 0){
-							 echo "<div class='panel-heading'>$topic</div>
+							 echo "<div class='card-header' id='topic'>$topic</div>
 							<div class='panel-body' id='messages' >";
 						}
 						$dirty = 1;
@@ -230,7 +228,7 @@ session_start();
 			
 			?>
 			
-
+</div>
 
 
 		</div>
