@@ -12,7 +12,7 @@ session_start();
 
 	if(isset($_POST['newconvo'])) {
 		$id = $_POST['newconvo'];
-		$que = "SELECT * FROM messages where convo_id=$id";	
+		$que = "SELECT * FROM messages where convo_id=$id";
 	}
 
 	if(isset($_POST['firstconvo'])){
@@ -131,10 +131,16 @@ session_start();
 								$r = mysqli_fetch_assoc($result);
 								$topic = $r['convo_name'];
 								$msg = $r['msg_body'];
+								if ($convo_id==$id){
+								$active="active";}
+								else
+								{
+									$active="";
+								}
 							echo "
 							<form action='messages.php' method='post'>
 								<input type='hidden' name='newconvo' value=$convo_id>
-								<a href='javascript:;' class='list-group-item list-group-item-action' onclick='parentNode.submit();'>
+								<a href='javascript:;' class='list-group-item list-group-item-action $active' onclick='parentNode.submit();'>
 									<h5 class='list-group-item-heading'>$topic</h5>
 									<p class='list-group-item-text'>$msg</p>
 								</a>
@@ -151,8 +157,7 @@ session_start();
 	</div>
 	<div class="col-sm-8">
 		<div class="panel panel-default">
-			<div class="panel-heading"><?php echo "$topic"; ?></div>
-			<div class="panel-body" id="messages" >
+			
 			<!-- actual messages here-->
 			<!-- Each "well div" is a message post, these are placeholder -->
 			<?php 
@@ -163,8 +168,16 @@ session_start();
              	 }
               	else {
 					$results=array();
+					$dirty = 0;
 					while($rows = mysqli_fetch_assoc($res)){
+						
 						$results['object_name'][] = $rows;
+						$topic = $rows['convo_name'];
+						if($dirty == 0){
+							 echo "<div class='panel-heading'>$topic</div>
+							<div class='panel-body' id='messages' >";
+						}
+						$dirty = 1;
 						$user = $rows['username'];
 						$msg = $rows['msg_body'];
 						$date = $rows['date_'];
