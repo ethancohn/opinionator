@@ -25,18 +25,21 @@
             $records->execute();
             $results = $records->fetch(PDO::FETCH_ASSOC);
 
-            if(count($results) > 0 && $_POST['password']==$results['password']  ){
+            $testpw = $_POST['password'];
+            $realpw = $results['password'];
+
+            if(count($results) > 0 && password_verify($testpw, $realpw)  ){
 
                 $_SESSION['user_id'] = $results['user_id'];
                 $_SESSION['username'] = $results['username'];
                 header("Location: home.php");
+                exit;
 
-                    exit;
             } else {
                     
-                    $error = true;
-                    $message = "Sorry, those credentials do not match.";
-                }
+                $error = true;
+                $message = "Sorry, those credentials do not match.";
+            }
             
         } 
     }     

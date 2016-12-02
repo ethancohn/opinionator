@@ -113,7 +113,7 @@ body {
 		</form>
       <!--<a class="nav-link" href="./profile.php"> <?php echo $username ?>  </a> -->
     </li>
-    <li class="nav-item float-sm-right">
+    <li class="nav-item float-xs-right">
       <a class="nav-link" href="./index.php">Logout</a>
     </li>
   </ul>
@@ -219,6 +219,34 @@ body {
           </div>
 
           <button type="submit" name="about" class="btn btn-default">Confirm</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal change password-->
+<div id="Mchangepassword" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Change Password</h4>
+      </div>
+      <div class="modal-body">
+
+        <form action="profile.php" method="post">
+          <div class="form-group">
+            <label for="topic">Enter old password:</label>
+            <input type="text" class="form-control" id="old" name="topic">
+            <label for="topic">Enter new password:</label>
+            <input type="text" class="form-control" id="new" name="topic">
+          </div>
+
+          <button type="submit" name="submit" class="btn btn-default">Change</button>
         </form>
       </div>
     </div>
