@@ -178,9 +178,15 @@ if(isset($_POST['submit'])) { //Adding new comment
         </div>
         <div class="panel-footer">
           <form action="reply.php" method="post">
-            <div class="form-group">
-            <textarea class="form-control" placeholder="Write a reply" rows="3" name="comment" id="comment"></textarea>
-            </div>
+            <?php 
+        $exist = "SELECT * FROM messages WHERE username = '$username' and convo_id=$convo_id";
+        if(@mysqli_num_rows(mysqli_query($con, $exist))==0){
+          echo"
+          <div class='form-group'>
+          <textarea class='form-control' placeholder='Write a reply' rows='3' name='comment' id='comment'></textarea>
+          </div>";
+        }
+            ?>
             <div class="div col-sm-6">
               <label class="custom-control custom-checkbox">
                 <input type="hidden" name="follow" value="0">
