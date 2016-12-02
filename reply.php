@@ -126,6 +126,19 @@ if(isset($_POST['submit'])) { //Adding new comment
                     $user = $row['username'];
                     $msg = $row['msg_body'];
                     $date = $row['date_'];
+                    $avatar = "";
+                    //GET THE AVATAR
+                      $query = "SELECT * FROM users where username='$user'";
+                      $r = mysqli_query($con, $query);
+                      if($r == false){
+                        echo "ERROR SHAME ON YOU! HOPE ITS NOT ON THE LIVE DEMO.";
+                      }else{
+                        $row = mysqli_fetch_assoc($r);
+                        $avatar =$row['avatar'];
+                        //$notif =$row['notif'];
+                      }
+
+                    
 						        list($time, $pass) = explode(".", $date);
                     echo "<div class='card'>
                       <div class='media'>
@@ -139,7 +152,10 @@ if(isset($_POST['submit'])) { //Adding new comment
                           </form>
 
                         <a class='muser'>
-                            <img src='avatar.png' class='media-object' style='width:100px'>
+                            <!--<img src='avatar.png' class='media-object' style='width:100px'>-->
+                                      <object data='$avatar' type='image/jpg' style='width:100px;'>
+                                        <img src='img/default/avatar.png' class='media-object' style='width:100px;'/>
+                                      </object>
                         </a>
                         </div>
                         <div class='media-body'>

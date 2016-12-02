@@ -168,6 +168,17 @@ session_start();
 						$user = $rows['username'];
 						$msg = $rows['msg_body'];
 						$date = $rows['date_'];
+						//GET THE AVATAR
+	                      $query = "SELECT * FROM users where username='$user'";
+	                      $r = mysqli_query($con, $query);
+	                      if($r == false){
+	                        echo "ERROR SHAME ON YOU! HOPE ITS NOT ON THE LIVE DEMO.";
+	                      }else{
+	                        $row = mysqli_fetch_assoc($r);
+	                        $avatar =$row['avatar'];
+	                        //$notif =$row['notif'];
+	                      }
+
 						list($time, $pass) = explode(".", $date);
 						echo "<div class='card'>
 						<div class='media'>
@@ -181,7 +192,10 @@ session_start();
 							</form>
 
 							<a class='muser'>
-								<img src='avatar.png' class='media-object' style='width:100px'>
+								<!--<img src='avatar.png' class='media-object' style='width:100px'>-->
+								<object data='$avatar' type='image/jpg' style='width:100px;'>
+                                    <img src='img/default/avatar.png' class='media-object' style='width:100px;'/>
+                                </object>
 							</a>
 							</div>
 							<div class='media-body'>
@@ -299,7 +313,10 @@ function showmsg(msgid){
 							<h4 class="media-object" style="text-align:center;">`+username+`</h4>
 						</a>
 						<a class="muser">
-				    		<img src="avatar.png" class="media-object" style="width:100px">
+				    		<!--<img src="avatar.png" class="media-object" style="width:100px">-->
+				    		<object data='$avatar' type='image/jpg' style='width:100px;'>
+                               <img src='img/default/avatar.png' class='media-object' style='width:100px;'/>
+                            </object>
 						</a>
 				    </div>
 				    <div class="media-body">

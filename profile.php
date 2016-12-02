@@ -36,16 +36,16 @@ else
 	$user=$username;
 }
 
-if(isset($_POST['submitavatar'])) {
-    $pavatar = $_POST['avatar'];
+if(isset($_POST['avatar'])) {
+    $pavatar = $_POST['picture'];
     
     $sql = "UPDATE users SET avatar='$pavatar' WHERE username='$username'";
     mysqli_query($con, $sql);
     	   
 }
 
-if(isset($_POST['submitaboutme'])) {
-    $pabout = $_POST['about'];
+if(isset($_POST['about'])) {
+    $pabout = $_POST['abouttext'];
     
     $sql = "UPDATE users SET about='$pabout' WHERE username='$username'";
     mysqli_query($con, $sql);
@@ -183,8 +183,8 @@ body {
 
         <form action="profile.php" method="post">
           <div class="form-group">
-            <label for="topic">Enter picture URL</label>
-            <input type="text" class="form-control" id="topic" name="topic">
+            <label for="picture">Enter picture URL</label>
+            <input type="text" class="form-control" id="picture" name="picture">
           </div>
 
           <button type="submit" name="avatar" class="btn btn-default">Confirm</button>
@@ -210,8 +210,8 @@ body {
 
         <form action="profile.php" method="post">
           <div class="form-group">
-            <label for="topic">Enter your new description</label>
-            <textarea type="form-control" class="form-control" id="topic" name="topic"></textarea>
+            <label for="abouttext">Enter your new description</label>
+            <textarea type="form-control" class="form-control" id="abouttext" name="abouttext"></textarea>
           </div>
 
           <button type="submit" name="about" class="btn btn-default">Confirm</button>
@@ -280,7 +280,12 @@ function showprofile(uid){
 	{
 		var tnhtml=`<div class="col-sm-3">
       	 <ul class="list-group">
-			  <li class="list-group-item"><img src="`+avatar+`" class="media-object" style="width:100px">
+			  <li class="list-group-item">
+			  <!--<img src="`+avatar+`" class="media-object" style="width:100px">-->
+			  	<object data="`+avatar+`" type="image/jpg" style="width:100px">
+    			<img src="img/default/avatar.png" class="media-object" style="width:100px"/>
+				</object>
+
 			  <br>
 			  	<button type="button" data-toggle="modal" data-target="#Mchangeavatar" class="btn-info btn-primary btn-xs">change</button>
 			  </li>
