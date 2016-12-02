@@ -289,9 +289,14 @@ function showprofile(uid){
 	//as you can see, it is the equivalent of the "well div" place holder from the message section
 	if (uid==1)
 	{
-	var tnhtml=`<div class="col-sm-3">
+	{
+		var tnhtml=`<div class="col-sm-3">
       	 <ul class="list-group">
-			  <li class="list-group-item"><img src="`+avatar+`" class="media-object" style="width:100px;"></li>
+			  <li class="list-group-item">
+			  	<object data="`+avatar+`" type="image/jpg" style="width:100px;max-height: 100px;">
+    			<img src="img/default/avatar.png" class="media-object" style="width:100px"/>
+				</object>
+			  </li>
 			  <li class="list-group-item">`+country+`</li>
 			  <li class="list-group-item">Post Count: `+posts+`</li>
 			</ul>
@@ -299,21 +304,20 @@ function showprofile(uid){
       </div>
 		<div class="col-sm-8">
 			<ul class="list-group">
-			  <li class="list-group-item">`+tusername+`</li>
+			  <li class="list-group-item"><h4>`+tusername+`</h4></li>
 			  <li class="list-group-item"><b>About me:</b><br>
 			  <p>`+about+`
 			  </p>
 			  </li>
-			  <li class="list-group-item">???</li>
 			</ul>
 		</div>`;
+	}
 	}
 	else
 	{
 		var tnhtml=`<div class="col-sm-3">
       	 <ul class="list-group">
 			  <li class="list-group-item">
-			  <!--<img src="`+avatar+`" class="media-object" style="width:100px">-->
 			  	<object data="`+avatar+`" type="image/jpg" style="width:100px;max-height: 100px;">
     			<img src="img/default/avatar.png" class="media-object" style="width:100px"/>
 				</object>
@@ -328,7 +332,7 @@ function showprofile(uid){
       </div>
 		<div class="col-sm-8">
 			<ul class="list-group">
-			  <li class="list-group-item">`+tusername+`</li>
+			  <li class="list-group-item"><h4>`+tusername+`</h4></li>
 			  <li class="list-group-item"><b>About me:</b><br>
 			  <p>`+about+`
 			  </p>

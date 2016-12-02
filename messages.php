@@ -131,10 +131,16 @@ session_start();
 								$r = mysqli_fetch_assoc($result);
 								$topic = $r['convo_name'];
 								$msg = $r['msg_body'];
+								if ($convo_id==$id){
+								$active="active";}
+								else
+								{
+									$active="";
+								}
 							echo "
 							<form action='messages.php' method='post'>
 								<input type='hidden' name='newconvo' value=$convo_id>
-								<a href='javascript:;' class='list-group-item list-group-item-action' onclick='parentNode.submit();'>
+								<a href='javascript:;' class='list-group-item list-group-item-action $active' onclick='parentNode.submit();'>
 									<h5 class='list-group-item-heading'>$topic</h5>
 									<p class='list-group-item-text'>$msg</p>
 								</a>
