@@ -79,7 +79,7 @@ session_start();
 </head>
 <body>
 
-<nav class="navbar navbar-light bg-faded">
+<nav class="navbar navbar-light bg-faded navbar-fixed-top">
   <ul class="nav navbar-nav">
      
     <li class="nav-item active">
