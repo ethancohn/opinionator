@@ -38,6 +38,10 @@ else
 
 if(isset($_POST['avatar'])) {
     $pavatar = $_POST['picture'];
+    if ($pavatar=="")
+    {
+    	$pavatar="img/default/avatar.png";
+    }
     
     $sql = "UPDATE users SET avatar='$pavatar' WHERE username='$username'";
     mysqli_query($con, $sql);
@@ -259,7 +263,7 @@ function showprofile(uid){
 	{
 	var tnhtml=`<div class="col-sm-3">
       	 <ul class="list-group">
-			  <li class="list-group-item"><img src="`+avatar+`" class="media-object" style="width:100px"></li>
+			  <li class="list-group-item"><img src="`+avatar+`" class="media-object" style="width:100px;"></li>
 			  <li class="list-group-item">`+country+`</li>
 			  <li class="list-group-item">Post Count: `+posts+`</li>
 			</ul>
@@ -282,7 +286,7 @@ function showprofile(uid){
       	 <ul class="list-group">
 			  <li class="list-group-item">
 			  <!--<img src="`+avatar+`" class="media-object" style="width:100px">-->
-			  	<object data="`+avatar+`" type="image/jpg" style="width:100px">
+			  	<object data="`+avatar+`" type="image/jpg" style="width:100px;max-height: 100px;">
     			<img src="img/default/avatar.png" class="media-object" style="width:100px"/>
 				</object>
 
