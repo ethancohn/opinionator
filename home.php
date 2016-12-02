@@ -63,27 +63,30 @@ function randomMsg() {
     
      <link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
      <link rel="stylesheet" href="css/styles.css">
+
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.2/angular.min.js"></script>
 </head>
 <body>
+    <div ng-app=""></div>
 <!--
     <header>
         <h4>John Doe</h4>
         <!-- setting icon. font awesome
     </header> -->
     <nav class="navbar navbar-light bg-faded">
-  <ul class="nav navbar-nav">
-     
-    <li class="nav-item active">
-      <a class="nav-link" href="./home.php">Home <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="profile.php"> <?php echo $username ?>  </a>
-    </li>
-    <li class="nav-item float-xs-right">
-      <a class="nav-link" href="index.php">Logout</a>
-    </li>
-  </ul>
-</nav>
+    <ul class="nav navbar-nav">
+        
+        <li class="nav-item active">
+        <a class="nav-link" href="./home.php">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="profile.php"> <?php echo $username ?>  </a>
+        </li>
+        <li class="nav-item float-xs-right">
+        <a class="nav-link" href="index.php">Logout</a>
+        </li>
+    </ul>
+    </nav>
 
     <div class="content">
 
@@ -160,7 +163,7 @@ function randomMsg() {
           <div class="form-check">
             <label class="custom-control custom-checkbox">
                 <input type="hidden" name="follow" value="0">
-                <input type="checkbox" name="follow" value="1" class="custom-control-input" />
+                <input type="checkbox" name="follow" value="1" class="custom-control-input" checked="true" />
                 
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description"> Follow</span>
