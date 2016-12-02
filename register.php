@@ -57,9 +57,11 @@
 		<link rel="stylesheet" href="css/reset.css">
     	<link rel="stylesheet" href="css/login.css">
      	<link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
+		 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.2/angular.min.js"></script>
+		 <script src="app.js"></script>
 	
 </head>
-<body>
+<body ng-app="validationApp" ng-controller="mainController">
 	<div class="content">
 
         <a class="link link--nukun" href="./home.php">Op<span>ini</span>on</a>
@@ -68,18 +70,22 @@
                 <div class="col-sm-8 offset-sm-2">
                     
                         <h1 style="float:left">Join Opinionator!</h1>
-                        <form action="register.php" method="POST" id="regForm">
-							<div class="form-group">
-								<input type="text" class="form-control form-control-lg"  placeholder="Username" name="username">
+                        <form action="register.php" method="POST" id="regForm" name="userForm"  novalidate ng-submit="submitForm(userForm.$valid)" >
+							<div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine && submitted }">
+								<input type="text" class="form-control form-control-lg" ng-model="user.username" placeholder="Username" name="username" ng-minlength="3" ng-maxlength="12" required>
+								 <p style="color:red" ng-show="userForm.username.$error.minlength" class="help-block">Username is too short.</p>
+  								<p style="color:red" ng-show="userForm.username.$error.maxlength" class="help-block">Username is too long.</p>
 							</div>
-							<div class="form-group">
-								<input type="password" class="form-control form-control-lg"  placeholder="Password" name="password">
+							<div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine && submitted }">
+								<input type="password" class="form-control form-control-lg" ng-model="user.password" placeholder="Password" name="password" ng-minlength="4" required>
+								 <p style="color:red" ng-show="userForm.password.$error.minlength" class="help-block">Password is too short.</p>
+  						
 							</div>
-							<div class="form-group">
-								<input type="password" class="form-control form-control-lg"  placeholder="Confirm Password" name="confirm_password">
+							<div class="form-group" ng-class="{ 'has-error' : userForm.confirm_password.$invalid && !userForm.confirm_password.$pristine && submitted}">
+								<input type="password" class="form-control form-control-lg" ng-model="user.confirm_password" placeholder="Confirm Password" name="confirm_password" ng-minlength="4" required>
 							</div>
 							<div class="form-group">						
-								<select class="form-control form-control-lg"  name="country">
+								<select class="form-control form-control-lg"  name="country" required>
 									
 								<option value="select country:" title="Select Country:">Select Country:</option>
 								<option value="Afghanistan" title="Afghanistan">Afghanistan</option>
