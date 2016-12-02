@@ -16,7 +16,7 @@ session_start();
 	}
 
 	if(isset($_POST['firstconvo'])){
-		$q = "SELECT * FROM convos_following where username='$username' ";
+		$q = "SELECT * FROM convos_following where username='$username' ORDER BY date_ DESC";
 		$out = mysqli_query($con, $q);
 		$row = mysqli_fetch_array($out);
 		$id = $row['convo_id'];
