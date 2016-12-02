@@ -130,25 +130,42 @@ if(isset($_POST['submit'])) { //Adding new comment
                     $user = $row['username'];
                     $msg = $row['msg_body'];
                     $date = $row['date_'];
+                    $avatar = "";
+                    //GET THE AVATAR
+                      $query = "SELECT * FROM users where username='$user'";
+                      $r = mysqli_query($con, $query);
+                      if($r == false){
+                        echo "ERROR SHAME ON YOU! HOPE ITS NOT ON THE LIVE DEMO.";
+                      }else{
+                        $row = mysqli_fetch_assoc($r);
+                        $avatar =$row['avatar'];
+                        $country = $row['country'];
+                        //$notif =$row['notif'];
+                      }
+
+                    
 						        list($time, $pass) = explode(".", $date);
                     echo "<div class='card'>
                       <div class='media'>
-                        <div class='media-left media-top'>
+                        <div class='media-left media-top' style='max-width: 120px;'>
                           <form action='./profile.php' method='post'> 
                             <input type='hidden' name='username' value=$user>
                             
                             <a href='javascript:;' onclick='parentNode.submit();'> 
-                                <h4 class='media-object' style='text-align:center;'>$user</h4>
+                                <h5 class='media-object' style='text-align:center;word-wrap: break-word;'>$user</h5>
                              </a>
                           </form>
 
                         <a class='muser'>
-                            <img src='avatar.png' class='media-object' style='width:100px'>
+                            <!--<img src='avatar.png' class='media-object' style='width:100px'>-->
+                                      <object data='$avatar' type='image/jpg' style='width:100px;max-height: 100px;'>
+                                        <img src='img/default/avatar.png' class='media-object' style='width:100px;'/>
+                                      </object>
                         </a>
                         </div>
                         <div class='media-body'>
-                          <h4 class='media-header'><small><i>$time</i></small></h4>        
-                          <p>$msg</p>
+                          <h6 class='media-header'><small>$time</small><small style='float: right;'>$country</small></h6>        
+                          <h5>$msg</h5>
                         </div>
                     </div>
                     </div>";

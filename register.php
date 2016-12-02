@@ -32,9 +32,9 @@
 			$sql = "INSERT INTO users ( username, password, country) VALUES (:username, :password, :country)";
 			$stmt = $conn->prepare($sql);
 			
+			$pw = password_hash($_POST['password'], PASSWORD_BCRYPT);
 			$stmt->bindParam(':username', $_POST['username']);
-			$stmt->bindParam(':password', $_POST['password']);
-
+			$stmt->bindParam(':password', $pw);
 			$stmt->bindParam(':country', $_POST['country']);
 
 
