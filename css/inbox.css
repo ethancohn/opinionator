@@ -5,9 +5,7 @@ html body {
     font-family: 'Asap', sans-serif !important;
     width: 100%;
     height: 100%;
-    clip: auto;
-    position: absolute;
-    overflow: hidden;
+    
 }
 
 
@@ -46,4 +44,16 @@ html body {
 
 .list-group-item-heading{
     font-weight: 600;
+}
+
+#topic{
+  border-left: 0.5px solid lightgrey;
+  font-weight: 600;
+  font-size: 110%;
+}
+
+#threads{
+  border-right: 0.5px solid lightgrey;
+  font-weight: 600;
+  font-size: 110%;
 }

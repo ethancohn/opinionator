@@ -80,7 +80,7 @@ if(isset($_POST['submit'])) { //Adding new comment
 
 
 
-<nav class="navbar navbar-light bg-faded">
+<nav class="navbar navbar-light bg-faded navbar-fixed-top">
   <ul class="nav navbar-nav">
      
     <li class="nav-item active">

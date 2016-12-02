@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `messages` (
   `msg_id` int(11) NOT NULL,
   `convo_id` int(11) NOT NULL,
-  `convo_name` varchar(50) CHARACTER SET armscii8 COLLATE armscii8_bin NOT NULL DEFAULT 'NOT NULL',
+  `convo_name` varchar(100) CHARACTER SET armscii8 COLLATE armscii8_bin NOT NULL DEFAULT 'NOT NULL',
   `username` varchar(20) CHARACTER SET armscii8 COLLATE armscii8_bin NOT NULL DEFAULT 'NOT NULL',
   `msg_body` varchar(10000) CHARACTER SET armscii8 COLLATE armscii8_bin NOT NULL DEFAULT 'NOT NULL',
   `date_` datetime(6) NOT NULL,

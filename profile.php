@@ -323,7 +323,7 @@ function showprofile(uid){
 				</object>
 
 			  <br>
-			  	<button type="button" data-toggle="modal" data-target="#Mchangeavatar" class="btn-info btn-primary btn-xs">change</button>
+			  	<button type="button" data-toggle="modal" data-target="#Mchangeavatar" class="btn btn-primary btn-xs">change</button>
 			  </li>
 			  <li class="list-group-item">`+country+`</li>
 			  <li class="list-group-item">Post Count: `+posts+`</li>
@@ -337,7 +337,7 @@ function showprofile(uid){
 			  <p>`+about+`
 			  </p>
 			  <br>
-			  <button type="button" data-toggle="modal" data-target="#Mchangeaboutme" class="btn-info btn-primary btn-xs">change</button>
+			  <button type="button" data-toggle="modal" data-target="#Mchangeaboutme" class="btn btn-primary btn-xs">change</button>
 			  </li>
 			</ul>
 		</div>`;

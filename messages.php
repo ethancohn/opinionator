@@ -99,7 +99,6 @@ session_start();
 <div class="col-sm-12">
     <div class="page-header" id="mailbox">
     <!-- Page title, im not sure it fits, but I followed the format of the front page, feel free to remove-->
-        <h1>Mailbox</h1>
 
     </div>
 </div>
@@ -109,7 +108,7 @@ session_start();
 <div class="row">
 	<div class="col-sm-4"><!-- This is the threads (message list) section-->
 		<div class="panel panel-default">
-			<div class="panel-heading">Messages</div>
+			<div class="card-header" id="threads">Threads</div>
 			<div class="panel-body" id="thread">	
 				<div class="list-group" id="threads">
 				<!--Thread list start-->
@@ -157,7 +156,10 @@ session_start();
 	</div>
 	<div class="col-sm-8">
 		<div class="panel panel-default">
-			
+
+			<div class="card-header" id="topic"><?php echo "$topic"; ?></div>
+			<div class="panel-body" id="messages" >
+
 			<!-- actual messages here-->
 			<!-- Each "well div" is a message post, these are placeholder -->
 			<?php 
