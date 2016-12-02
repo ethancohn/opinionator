@@ -29,7 +29,9 @@ if(isset($_POST['submit'])) {
 
          $stm->execute();
     }
-    
+
+    $post = "UPDATE users SET post_count=post_count+1 WHERE username='$username'";
+    mysqli_query($con, $post);
 
     $sql = "INSERT INTO messages (convo_id, convo_name, username, msg_body, date_, upvote) VALUES (:convo_id, :convo_name, :username, :msg_body, NOW(), 0)";
     $stmt = $conn->prepare($sql);

@@ -13,7 +13,7 @@ if(isset($_POST['catch'])) { //display a new thread
     $query = "SELECT MAX(convo_id) as max FROM messages";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_array($result);
-    $max = $row['max']+1;
+    $max = $row['max'];
 
     $convo_id= rand(1, $max );
  
@@ -40,9 +40,12 @@ if(isset($_POST['submit'])) { //Adding new comment
         mysqli_query($con, $q);
     }
     if(!empty($comment)){
+
+      $post = "UPDATE users SET post_count=post_count+1 WHERE username='$username'";
+      mysqli_query($con, $post);
       
       $time = "UPDATE convos_following SET date_=NOW() WHERE convo_id=$convo_id";
-        mysqli_query($con, $time);
+      mysqli_query($con, $time);
 
       $sql = "INSERT INTO messages (convo_id, convo_name, username, msg_body, date_, upvote) VALUES (:convo_id, :convo_name, :username, :msg_body, NOW(), 0)";
       $stmt = $conn->prepare($sql);
@@ -122,6 +125,8 @@ if(isset($_POST['submit'])) { //Adding new comment
                     $results['object_name'][] = $row;
                     $user = $row['username'];
                     $msg = $row['msg_body'];
+                    $date = $row['date_'];
+						        list($time, $pass) = explode(".", $date);
                     echo "<div class='card'>
                       <div class='media'>
                         <div class='media-left media-top'>
@@ -138,7 +143,7 @@ if(isset($_POST['submit'])) { //Adding new comment
                         </a>
                         </div>
                         <div class='media-body'>
-                          <h4 class='media-header'><small><i>date</i></small></h4>        
+                          <h4 class='media-header'><small><i>$time</i></small></h4>        
                           <p>$msg</p>
                         </div>
                     </div>
