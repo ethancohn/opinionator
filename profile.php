@@ -36,6 +36,22 @@ else
 	$user=$username;
 }
 
+if(isset($_POST['submitavatar'])) {
+    $pavatar = $_POST['avatar'];
+    
+    $sql = "UPDATE users SET avatar='$pavatar' WHERE username='$username'";
+    mysqli_query($con, $sql);
+    	   
+}
+
+if(isset($_POST['submitaboutme'])) {
+    $pabout = $_POST['about'];
+    
+    $sql = "UPDATE users SET about='$pabout' WHERE username='$username'";
+    mysqli_query($con, $sql);
+    	   
+}
+
 	$query = "SELECT * FROM users where username='$user'";
 	$r = mysqli_query($con, $query);
 	if($r == false){
@@ -44,9 +60,9 @@ else
 		$row = mysqli_fetch_assoc($r);
 		$user = $row['username'];
 		$country = $row['country'];
-		//$aboutme = $row['aboutme'];
-		$posts  = $row['convos_following']; //actually its lenght
-		//$avatar =$row['avatar'];
+		$about = $row['about'];
+		$posts  = $row['post_count']; //actually its lenght
+		$avatar =$row['avatar'];
 		//$notif =$row['notif'];
 	}
 
@@ -171,7 +187,7 @@ body {
             <input type="text" class="form-control" id="topic" name="topic">
           </div>
 
-          <button type="submit" name="submit" class="btn btn-default">Confirm</button>
+          <button type="submit" name="avatar" class="btn btn-default">Confirm</button>
         </form>
       </div>
     </div>
@@ -198,7 +214,7 @@ body {
             <textarea type="form-control" class="form-control" id="topic" name="topic"></textarea>
           </div>
 
-          <button type="submit" name="submit" class="btn btn-default">Confirm</button>
+          <button type="submit" name="about" class="btn btn-default">Confirm</button>
         </form>
       </div>
     </div>
@@ -229,13 +245,13 @@ function showprofile(uid){
 	//username=JSON.parse(tusername);alert("Yo");
 	
 	//fetch from msg sql, get date
-	var avatar="avatar.png";//<?php //echo "$avatar" ?>;
+	var avatar=<?php echo json_encode($avatar); ?>;;//<?php //echo "$avatar" ?>;
 	//fetch from mesg sql, get text
-	var about= "Im cool";//<?php //echo "$aboutme" ?>
+	var about= <?php echo json_encode($about); ?>;;//<?php //echo "$aboutme" ?>
 	//fetch from mesg sql, get text
 	var country=<?php echo json_encode($country); ?>;//<?php// echo "$country"; ?>;
 	//fetch from mesg sql, get text
-	var posts= "xyz";//<?php //echo "$posts" ?>;
+	var posts= <?php echo json_encode($posts); ?>;;//<?php //echo "$posts" ?>;
 
 	//creates the post string:
 	//as you can see, it is the equivalent of the "well div" place holder from the message section
@@ -282,7 +298,6 @@ function showprofile(uid){
 			  <br>
 			  <button type="button" data-toggle="modal" data-target="#Mchangeaboutme" class="btn-info btn-primary btn-xs">change</button>
 			  </li>
-			  <li class="list-group-item">???</li>
 			</ul>
 		</div>`;
 	}
