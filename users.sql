@@ -31,15 +31,7 @@ CREATE TABLE `users` (
   `notifications` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `users`
---
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `country`, `avatar`, `about`, `post_count`, `notifications`) VALUES
-(16, 'tony', 'chen', 'Afghanistan', 'img/default/avatar.png', '', 0, 0),
-(17, 'kanye', 'west', 'Armenia', 'img/default/avatar.png', '', 0, 0);
-
---
 -- Indexes for dumped tables
 --
 
