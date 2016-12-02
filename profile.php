@@ -31,6 +31,26 @@ if(isset($_POST['username'])) { //display a new thread
     //$notif =$row['notif'];
  */
 }
+else
+{
+	$user=$username;
+}
+
+if(isset($_POST['avatar'])) {
+    $pavatar = $_POST['picture'];
+    
+    $sql = "UPDATE users SET avatar='$pavatar' WHERE username='$username'";
+    mysqli_query($con, $sql);
+    	   
+}
+
+if(isset($_POST['about'])) {
+    $pabout = $_POST['abouttext'];
+    
+    $sql = "UPDATE users SET about='$pabout' WHERE username='$username'";
+    mysqli_query($con, $sql);
+    	   
+}
 
 	$query = "SELECT * FROM users where username='$user'";
 	$r = mysqli_query($con, $query);
@@ -40,9 +60,9 @@ if(isset($_POST['username'])) { //display a new thread
 		$row = mysqli_fetch_assoc($r);
 		$user = $row['username'];
 		$country = $row['country'];
-		//$aboutme = $row['aboutme'];
-		$posts  = $row['convos_following']; //actually its lenght
-		//$avatar =$row['avatar'];
+		$about = $row['about'];
+		$posts  = $row['post_count']; //actually its lenght
+		$avatar =$row['avatar'];
 		//$notif =$row['notif'];
 	}
 
@@ -55,16 +75,11 @@ if(isset($_POST['username'])) { //display a new thread
   <title>Profile</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
  <link rel="stylesheet" href="bootstrap-4.0.0/css/bootstrap.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <!--<script src="/socket.io/socket.io.js"></script>-->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <!--
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script
-  -->
+  
+
 <style>
 	html{
   height: 100%;
@@ -168,11 +183,11 @@ body {
 
         <form action="profile.php" method="post">
           <div class="form-group">
-            <label for="topic">Enter picture URL</label>
-            <input type="text" class="form-control" id="topic" name="topic">
+            <label for="picture">Enter picture URL</label>
+            <input type="text" class="form-control" id="picture" name="picture">
           </div>
 
-          <button type="submit" name="submit" class="btn btn-default">Confirm</button>
+          <button type="submit" name="avatar" class="btn btn-default">Confirm</button>
         </form>
       </div>
     </div>
@@ -195,11 +210,11 @@ body {
 
         <form action="profile.php" method="post">
           <div class="form-group">
-            <label for="topic">Enter your new description</label>
-            <textarea type="form-control" class="form-control" id="topic" name="topic"></textarea>
+            <label for="abouttext">Enter your new description</label>
+            <textarea type="form-control" class="form-control" id="abouttext" name="abouttext"></textarea>
           </div>
 
-          <button type="submit" name="submit" class="btn btn-default">Confirm</button>
+          <button type="submit" name="about" class="btn btn-default">Confirm</button>
         </form>
       </div>
     </div>
@@ -238,7 +253,13 @@ body {
 </div>
 
 
-</body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <!--<script src="/socket.io/socket.io.js"></script>-->
+  
+  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 
@@ -252,13 +273,13 @@ function showprofile(uid){
 	//username=JSON.parse(tusername);alert("Yo");
 	
 	//fetch from msg sql, get date
-	var avatar="avatar.png";//<?php //echo "$avatar" ?>;
+	var avatar=<?php echo json_encode($avatar); ?>;;//<?php //echo "$avatar" ?>;
 	//fetch from mesg sql, get text
-	var about= "Im cool";//<?php //echo "$aboutme" ?>
+	var about= <?php echo json_encode($about); ?>;;//<?php //echo "$aboutme" ?>
 	//fetch from mesg sql, get text
 	var country=<?php echo json_encode($country); ?>;//<?php// echo "$country"; ?>;
 	//fetch from mesg sql, get text
-	var posts= "xyz";//<?php //echo "$posts" ?>;
+	var posts= <?php echo json_encode($posts); ?>;;//<?php //echo "$posts" ?>;
 
 	//creates the post string:
 	//as you can see, it is the equivalent of the "well div" place holder from the message section
@@ -287,7 +308,12 @@ function showprofile(uid){
 	{
 		var tnhtml=`<div class="col-sm-3">
       	 <ul class="list-group">
-			  <li class="list-group-item"><img src="`+avatar+`" class="media-object" style="width:100px">
+			  <li class="list-group-item">
+			  <!--<img src="`+avatar+`" class="media-object" style="width:100px">-->
+			  	<object data="`+avatar+`" type="image/jpg" style="width:100px">
+    			<img src="img/default/avatar.png" class="media-object" style="width:100px"/>
+				</object>
+
 			  <br>
 			  	<button type="button" data-toggle="modal" data-target="#Mchangeavatar" class="btn-info btn-primary btn-xs">change</button>
 			  </li>
@@ -305,7 +331,6 @@ function showprofile(uid){
 			  <br>
 			  <button type="button" data-toggle="modal" data-target="#Mchangeaboutme" class="btn-info btn-primary btn-xs">change</button>
 			  </li>
-			  <li class="list-group-item">???</li>
 			</ul>
 		</div>`;
 	}
@@ -351,5 +376,6 @@ function noprofile(){
 		";
 	}
 ?>
+</body>
 
 </html>

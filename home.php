@@ -21,7 +21,7 @@ if(isset($_POST['submit'])) {
     $highest_id = $row['max']+1;
 
     if($_POST['follow'] == '1'){
-        $q = "INSERT INTO convos_following (username, convo_id) VALUES (:username, :convo_id)";
+        $q = "INSERT INTO convos_following (username, convo_id, date_) VALUES (:username, :convo_id, NOW())";
         $stm = $conn->prepare($q);
 
          $stm->bindParam(':convo_id', $highest_id, PDO::PARAM_INT);
@@ -29,9 +29,11 @@ if(isset($_POST['submit'])) {
 
          $stm->execute();
     }
-    
 
-    $sql = "INSERT INTO messages (convo_id, convo_name, username, msg_body) VALUES (:convo_id, :convo_name, :username, :msg_body)";
+    $post = "UPDATE users SET post_count=post_count+1 WHERE username='$username'";
+    mysqli_query($con, $post);
+
+    $sql = "INSERT INTO messages (convo_id, convo_name, username, msg_body, date_, upvote) VALUES (:convo_id, :convo_name, :username, :msg_body, NOW(), 0)";
     $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(':convo_id', $highest_id, PDO::PARAM_INT);

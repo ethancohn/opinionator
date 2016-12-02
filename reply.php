@@ -10,10 +10,10 @@ if(!isset($_SESSION['user_id'])) { //if not yet logged in
    exit;
 } 
 if(isset($_POST['catch'])) { //display a new thread
-    $query = "SELECT * FROM messages";
+    $query = "SELECT MAX(convo_id) as max FROM messages";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_array($result);
-    $max = $row['convo_id'];
+    $max = $row['max'];
 
     $convo_id= rand(1, $max );
  
@@ -27,36 +27,37 @@ if(isset($_POST['catch'])) { //display a new thread
 }
 if(isset($_POST['submit'])) { //Adding new comment
     
-    $comment = $_POST['comment'];
-    $convo_id = $_POST['prev'];
-    $que = "SELECT * FROM messages where convo_id=$convo_id";
+      $comment = $_POST['comment'];
+      $convo_id = $_POST['prev'];
+      $que = "SELECT * FROM messages where convo_id=$convo_id";
 
-    $r = mysqli_query($con, $que);
-    $row = mysqli_fetch_assoc($r);
-    $topic = $row['convo_name'];
+      $r = mysqli_query($con, $que);
+      $row = mysqli_fetch_assoc($r);
+      $topic = $row['convo_name'];
 
     if($_POST['follow'] == '1'){
-        $q = "INSERT INTO convos_following (username, convo_id) VALUES (:username, :convo_id)";
-        $stm = $conn->prepare($q);
-
-         $stm->bindParam(':convo_id', $convo_id, PDO::PARAM_INT);
-         $stm->bindParam(':username', $username, PDO::PARAM_STR);
-
-         $stm->execute();
+        $q = "INSERT INTO convos_following (username, convo_id, date_) VALUES ('$username', $convo_id, NOW())";
+        mysqli_query($con, $q);
     }
-    
+    if(!empty($comment)){
 
+      $post = "UPDATE users SET post_count=post_count+1 WHERE username='$username'";
+      mysqli_query($con, $post);
+      
+      $time = "UPDATE convos_following SET date_=NOW() WHERE convo_id=$convo_id";
+      mysqli_query($con, $time);
 
-    $sql = "INSERT INTO messages (convo_id, convo_name, username, msg_body) VALUES (:convo_id, :convo_name, :username, :msg_body)";
-    $stmt = $conn->prepare($sql);
+      $sql = "INSERT INTO messages (convo_id, convo_name, username, msg_body, date_, upvote) VALUES (:convo_id, :convo_name, :username, :msg_body, NOW(), 0)";
+      $stmt = $conn->prepare($sql);
 
-    $stmt->bindParam(':convo_id', $convo_id, PDO::PARAM_INT);
-    $stmt->bindParam(':convo_name', $topic, PDO::PARAM_STR);
-    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-    $stmt->bindParam(':msg_body', $comment, PDO::PARAM_STR);
-    
-    
-    $stmt->execute();
+      $stmt->bindParam(':convo_id', $convo_id, PDO::PARAM_INT);
+      $stmt->bindParam(':convo_name', $topic, PDO::PARAM_STR);
+      $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+      $stmt->bindParam(':msg_body', $comment, PDO::PARAM_STR);
+      
+      
+      $stmt->execute();
+    }
             
 }
 ?>
@@ -124,6 +125,21 @@ if(isset($_POST['submit'])) { //Adding new comment
                     $results['object_name'][] = $row;
                     $user = $row['username'];
                     $msg = $row['msg_body'];
+                    $date = $row['date_'];
+                    $avatar = "";
+                    //GET THE AVATAR
+                      $query = "SELECT * FROM users where username='$user'";
+                      $r = mysqli_query($con, $query);
+                      if($r == false){
+                        echo "ERROR SHAME ON YOU! HOPE ITS NOT ON THE LIVE DEMO.";
+                      }else{
+                        $row = mysqli_fetch_assoc($r);
+                        $avatar =$row['avatar'];
+                        //$notif =$row['notif'];
+                      }
+
+                    
+						        list($time, $pass) = explode(".", $date);
                     echo "<div class='card'>
                       <div class='media'>
                         <div class='media-left media-top'>
@@ -136,11 +152,14 @@ if(isset($_POST['submit'])) { //Adding new comment
                           </form>
 
                         <a class='muser'>
-                            <img src='avatar.png' class='media-object' style='width:100px'>
+                            <!--<img src='avatar.png' class='media-object' style='width:100px'>-->
+                                      <object data='$avatar' type='image/jpg' style='width:100px;'>
+                                        <img src='img/default/avatar.png' class='media-object' style='width:100px;'/>
+                                      </object>
                         </a>
                         </div>
                         <div class='media-body'>
-                          <h4 class='media-header'><small><i>date</i></small></h4>        
+                          <h4 class='media-header'><small><i>$time</i></small></h4>        
                           <p>$msg</p>
                         </div>
                     </div>
