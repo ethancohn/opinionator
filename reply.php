@@ -36,7 +36,11 @@ if(isset($_POST['submit'])) { //Adding new comment
       $topic = $row['convo_name'];
 
     if($_POST['follow'] == '1'){
-        $q = "INSERT INTO convos_following (username, convo_id, date_) VALUES ('$username', $convo_id, NOW())";
+        $q = "INSERT INTO convos_following (username, convo_id, date_)
+         SELECT * FROM  (SELECT '$username', $convo_id, NOW()) AS tmp
+        WHERE NOT EXISTS (
+          SELECT * FROM convos_following WHERE username = '$username' and convo_id=$convo_id
+        ) LIMIT 1";
         mysqli_query($con, $q);
     }
     if(!empty($comment)){
