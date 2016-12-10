@@ -1,2 +1,2 @@
 # opinionator
-Anonymous message board website
+Randomized message board website
